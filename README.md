@@ -1,58 +1,105 @@
-# Movie Recommendation System
+# 🎬 Movie Recommendation Model
 
-## Overview
+Spersonalizowany system rekomendacji filmów wykorzystujący deep learning (PyTorch) i dane z TMDB oraz Letterboxd.
 
-The Movie Recommendation System is a project designed to recommend movies to users based on their ratings on the Letterboxd platform. By utilizing user data and advanced recommendation algorithms, the system aims to provide personalized movie suggestions.
+## 📋 Opis projektu
 
-## Project Structure
+Model uczący się na podstawie preferencji użytkownika (oceny z Letterboxd/Filmweb) i rekomendujący filmy/seriale z obszernej bazy TMDB.
+
+### Funkcjonalności:
+
+- 🎯 Personalizowane rekomendacje filmów
+- 📊 Analiza preferencji użytkownika (gatunki, aktorzy, reżyserzy)
+- 🧠 Sieć neuronowa (PyTorch) z embeddingami
+- 🗄️ Baza danych SQLite z ~10 000 filmów i 1000 seriali
+
+## 🏗️ Struktura projektu
 
 ```
-movie-recommendation-system
-├── src
-│   ├── data
-│   │   ├── data_loader.py
-│   │   └── preprocessor.py
-│   ├── models
-│   │   ├── recommender.py
-│   │   └── utils.py
-│   ├── scraper
-│   │   └── letterboxd_scraper.py
-│   └── config.py
-├── tests
-│   ├── test_data_loader.py
-│   ├── test_preprocessor.py
-│   └── test_recommender.py
-├── .gitignore
-├── requirements.txt
+├── src/
+│   ├── database/              # Pobieranie i zarządzanie bazą danych
+│   │   ├── database_setup.py      # Tworzenie tabel SQLite
+│   │   ├── tmdb_client.py         # Klient TMDB API
+│   │   └── database_fetcher.py    # Pobieranie danych z TMDB
+│   │
+│   ├── user_data/            # Parsowanie danych użytkownika
+│   │   └── letterboxd_parser.py   # Parser eksportów Letterboxd
+│   │
+│   └── model/                # Model ML (PyTorch)
+│       ├── model.py              # Architektury sieci neuronowych
+│       ├── training.py           # Trenowanie modelu
+│       ├── recommender.py        # System rekomendacji
+│       └── utils.py              # Funkcje pomocnicze
+│
+├── user_data/                # Dane użytkownika (CSV z Letterboxd/Filmweb)
+├── requirements.txt          # Zależności Python
 └── README.md
 ```
 
-## Setup Instructions
+## 🚀 Instalacja
 
-1. Clone the repository:
-   ```
-   git clone <https://github.com/PaeSielawa/Movie-recomendation-model>
-   ```
-2. Navigate to the project directory:
-   ```
-   cd movie-recommendation-system
-   ```
-3. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
+1. Sklonuj repozytorium:
 
-## Usage
+```bash
+git clone https://github.com/PaeSielawa/Movie-recomendation-model.git
+cd Movie-recomendation-model
+```
 
-1. Scrape user ratings using `scrape_user_ratings()` function from `letterboxd_scraper.py`
-2. Preprocess the data with `preprocess_data(data)` function from `preprocessor.py`
-3. Train the recommendation model using the `Recommender` class from `recommender.py`
-4. Generate movie recommendations for a user by calling `recommend(user_id, num_recommendations)` method
+2. Zainstaluj zależności:
 
-## Contributing
+```bash
+pip install -r requirements.txt
+```
 
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or features.
+3. Pobierz bazę filmów z TMDB:
 
-## License
+```bash
+python src/database/database_fetcher.py
+```
 
-This project was created by PS. All rights reserved.
+## 📊 Źródła danych
+
+- **TMDB (The Movie Database)**: ~10 000 filmów i 1 000 seriali
+
+  - Tytuły, rok, gatunki, opisy
+  - Obsada (top 10 aktorów)
+  - Reżyserzy
+  - Oceny i popularność
+
+- **Letterboxd**: Eksport danych użytkownika (CSV)
+  - Historia oglądania
+  - Oceny filmów
+  - Ulubione filmy
+
+## 🧠 Model
+
+### Architektura:
+
+- **Embeddingi**: filmy, gatunki, aktorzy, reżyserzy
+- **Feed-Forward Neural Network**: warstwy ukryte z dropout i batch normalization
+- **Output**: przewidywana ocena użytkownika (0-5)
+
+### Technologie:
+
+- PyTorch 2.0+
+- Pandas, NumPy
+- SQLite
+- TensorBoard (monitoring treningu)
+
+## 📝 TODO
+
+- [ ] Pobrać pełną bazę danych z TMDB
+- [ ] Dopasować filmy użytkownika do bazy TMDB
+- [ ] Stworzyć profil użytkownika
+- [ ] Wytrenować model
+- [ ] Zaimplementować system rekomendacji
+- [ ] Dodać wsparcie dla Filmweb CSV
+- [ ] Stworzyć interfejs użytkownika (opcjonalnie)
+
+## 📄 Licencja
+
+Projekt edukacyjny - wykorzystuje dane z TMDB (https://www.themoviedb.org/)
+
+## 👤 Autor
+
+PaeSielawa
