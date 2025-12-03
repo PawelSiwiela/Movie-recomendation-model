@@ -36,22 +36,23 @@ Model uczący się na podstawie preferencji użytkownika (oceny z Letterboxd/Fil
 └── README.md
 ```
 
-## 🚀 Instalacja
+## Setup Instructions
 
-1. Sklonuj repozytorium:
+1. Clone the repository:
+   ```
+   git clone <https://github.com/PaeSielawa/Movie-recomendation-model>
+   ```
+2. Navigate to the project directory:
+   ```
+   cd movie-recommendation-system
+   ```
+3. Install the required dependencies:
 
-```bash
-git clone https://github.com/PaeSielawa/Movie-recomendation-model.git
-cd Movie-recomendation-model
-```
+   ```
+   pip install -r requirements.txt
+   ```
 
-2. Zainstaluj zależności:
-
-```bash
-pip install -r requirements.txt
-```
-
-3. Pobierz bazę filmów z TMDB:
+4. Pobierz bazę filmów z TMDB:
 
 ```bash
 python src/database/database_fetcher.py
