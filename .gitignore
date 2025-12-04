@@ -49,17 +49,16 @@ src/data/movies.db
 data/*.db
 
 # User data (prywatne) - dane użytkowników Letterboxd
-database_user/letterboxd-*/
+database_user/letterboxd-paesielawa-*
+database_user/letterboxd-plisiu-*
 database_user/*.csv
 database_user/filmweb-*/
 user_data/letterboxd-*/
 user_data/*.csv
 user_data/filmweb-*/
 
-# Tymczasowe dane użytkownika (matched, prepared, etc.)
-src/data/matched_movies.csv
-src/data/unmatched_movies.csv
-src/data/prepared/
+# Tymczasowe dane użytkownika (wszystkie pliki w src/data/)
+src/data/
 
 # API Keys
 .env
