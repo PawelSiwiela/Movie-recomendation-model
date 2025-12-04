@@ -37,7 +37,8 @@ class MovieRatingTrainer:
         model: nn.Module,
         device: str = 'cuda' if torch.cuda.is_available() else 'cpu',
         learning_rate: float = 0.001,
-        weight_decay: float = 1e-5
+        weight_decay: float = 1e-5,
+        input_dim: int = None
     ):
         """
         Args:
@@ -45,9 +46,11 @@ class MovieRatingTrainer:
             device: 'cuda' lub 'cpu'
             learning_rate: Learning rate dla optymalizatora
             weight_decay: Weight decay (L2 regularization)
+            input_dim: Wymiar wejścia modelu
         """
         self.model = model.to(device)
         self.device = device
+        self.input_dim = input_dim
         
         # Optimizer i loss
         self.optimizer = optim.Adam(
@@ -100,8 +103,8 @@ class MovieRatingTrainer:
             self.optimizer.zero_grad()
             predictions = self.model(X_batch)
             
-            # Loss (reshape y do (batch_size, 1))
-            loss = self.criterion(predictions, y_batch.unsqueeze(1))
+            # Loss - model outputs [batch_size], y_batch is [batch_size]
+            loss = self.criterion(predictions, y_batch)
             
             # Backward pass
             loss.backward()
@@ -138,7 +141,7 @@ class MovieRatingTrainer:
                 y_batch = y_batch.to(self.device)
                 
                 predictions = self.model(X_batch)
-                loss = self.criterion(predictions, y_batch.unsqueeze(1))
+                loss = self.criterion(predictions, y_batch)
                 
                 total_loss += loss.item()
                 num_batches += 1
@@ -232,6 +235,8 @@ class MovieRatingTrainer:
                         'optimizer_state_dict': self.optimizer.state_dict(),
                         'val_loss': val_loss,
                         'val_rmse': val_rmse,
+
+                        'input_dim': self.input_dim,
                     }, best_path)
                     print(f"  ✅ Saved best model (val_loss: {val_loss:.4f})")
             else:
@@ -250,6 +255,7 @@ class MovieRatingTrainer:
                     'model_state_dict': self.model.state_dict(),
                     'optimizer_state_dict': self.optimizer.state_dict(),
                     'val_loss': val_loss,
+                    'input_dim': self.input_dim,
                 }, checkpoint_file)
         
         total_time = time.time() - start_time
@@ -344,7 +350,7 @@ if __name__ == "__main__":
     
     # Utwórz model
     input_dim = X_train.shape[1]
-    model = create_model(input_dim, model_type='standard')
+    model = create_model(input_dim)
     
     # Utwórz trainera
     trainer = MovieRatingTrainer(model, learning_rate=0.001)

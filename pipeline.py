@@ -2,20 +2,35 @@
 Pipeline do pełnego przetwarzania danych użytkownika i generowania rekomendacji.
 
 Automatycznie wykonuje:
-1. Dopasowanie filmów użytkownika z Letterboxd do bazy TMDB
-2. Przygotowanie danych treningowych (wzbogacenie metadanymi)
-3. Opcjonalnie: Trenowanie modelu (jeśli --train)
-4. Generowanie rekomendacji filmów i seriali
+1. Interaktywny wybór użytkownika (jeśli nie podano --user)
+2. Czyszczenie starych plików tymczasowych (jeśli istnieją)
+3. Dopasowanie filmów użytkownika z Letterboxd do bazy TMDB
+4. Przygotowanie danych treningowych (wzbogacenie metadanymi)
+5. Trenowanie modelu od zera dla wybranego użytkownika
+6. Generowanie rekomendacji filmów i seriali
+7. Czyszczenie plików tymczasowych po zakończeniu
+
+WAŻNE: Pliki tymczasowe (matched_movies.csv, encoders.pkl, best_model.pth)
+są automatycznie usuwane po zakończeniu, aby nie zajmować miejsca.
 
 Usage:
-    # Tylko rekomendacje (używa istniejącego modelu):
+    # Interaktywny wybór użytkownika:
+    python pipeline.py
+    
+    # Bezpośredni wybór użytkownika:
     python pipeline.py --user letterboxd-plisiu-2025-12-04-11-19-utc
     
-    # Z treningiem modelu:
-    python pipeline.py --user letterboxd-plisiu-2025-12-04-11-19-utc --train
+    # Szybki trening (50 epok):
+    python pipeline.py --epochs 50
     
-    # Zmiana liczby rekomendacji:
-    python pipeline.py --user letterboxd-plisiu-2025-12-04-11-19-utc --n 30
+    # Więcej rekomendacji:
+    python pipeline.py --n 30
+    
+    # Wybór architektury:
+    python pipeline.py
+    
+    # Zachowaj pliki tymczasowe (do debugowania):
+    python pipeline.py --skip-cleanup
 """
 
 import sys
@@ -46,6 +61,64 @@ def check_database_exists(db_path: Path) -> bool:
 def check_model_exists(model_path: Path) -> bool:
     """Sprawdza czy wytrenowany model istnieje."""
     return model_path.exists()
+
+
+def get_available_users(database_user_dir: Path) -> list[str]:
+    """Pobiera listę dostępnych folderów użytkowników Letterboxd."""
+    users = []
+    if database_user_dir.exists():
+        for folder in database_user_dir.iterdir():
+            if folder.is_dir() and folder.name.startswith("letterboxd-"):
+                users.append(folder.name)
+    return sorted(users)
+
+
+def select_user_interactive(database_user_dir: Path) -> str:
+    """Interaktywny wybór użytkownika z listy dostępnych folderów."""
+    users = get_available_users(database_user_dir)
+    
+    if not users:
+        print("❌ Nie znaleziono żadnych folderów użytkowników w database_user/")
+        print("💡 Folder użytkownika powinien zaczynać się od 'letterboxd-'")
+        sys.exit(1)
+    
+    print("\n" + "="*100)
+    print("📂 WYBÓR UŻYTKOWNIKA")
+    print("="*100)
+    print(f"\nZnaleziono {len(users)} użytkownik(ów):\n")
+    
+    for idx, user in enumerate(users, 1):
+        print(f"  {idx}. {user}")
+    
+    print()  # Dodatkowa pusta linia dla czytelności
+    
+    while True:
+        try:
+            # Flush stdout przed input() dla pewności
+            sys.stdout.flush()
+            sys.stderr.flush()
+            
+            choice = input("Wybierz numer użytkownika (lub 'q' aby wyjść): ").strip()
+            
+            if not choice:  # Pusta linia (Enter)
+                continue
+            
+            if choice.lower() == 'q':
+                print("\n👋 Do zobaczenia!")
+                sys.exit(0)
+            
+            choice_num = int(choice)
+            if 1 <= choice_num <= len(users):
+                selected = users[choice_num - 1]
+                print(f"\n✅ Wybrano: {selected}")
+                return selected
+            else:
+                print(f"❌ Wybierz numer od 1 do {len(users)}")
+        except ValueError:
+            print("❌ Wprowadź poprawny numer lub 'q'")
+        except (EOFError, KeyboardInterrupt):
+            print("\n\n👋 Przerwano przez użytkownika")
+            sys.exit(0)
 
 
 def step0_cleanup_temp_files(data_dir: Path, skip_cleanup: bool = False) -> bool:
@@ -88,14 +161,15 @@ def step0_cleanup_temp_files(data_dir: Path, skip_cleanup: bool = False) -> bool
             prepared_dir / "encoders.pkl",
         ])
     
-    # WAŻNE: Usuń też stary model bo enkodery się nie zgadzają!
+    # WAŻNE: Usuń WSZYSTKIE checkpointy bo enkodery się nie zgadzają!
     checkpoint_dir = data_dir.parent.parent / "checkpoints"
     if checkpoint_dir.exists():
-        model_files = [
-            checkpoint_dir / "best_model.pth",
-            checkpoint_dir / "latest_model.pth",
-        ]
-        files_to_remove.extend([f for f in model_files if f.exists()])
+        # Usuń wszystkie pliki .pth (best_model, checkpoint_epoch_*, etc.)
+        checkpoint_files = list(checkpoint_dir.glob("*.pth"))
+        files_to_remove.extend(checkpoint_files)
+    
+    # Usuń też folder runs/ (TensorBoard logs)
+    runs_dir = data_dir.parent.parent / "runs"
     
     removed = 0
     for file_path in files_to_remove:
@@ -107,10 +181,20 @@ def step0_cleanup_temp_files(data_dir: Path, skip_cleanup: bool = False) -> bool
             except Exception as e:
                 print(f"   ⚠️  Nie można usunąć {file_path.name}: {e}")
     
+    # Usuń folder runs/ (TensorBoard logs)
+    if runs_dir.exists():
+        import shutil
+        try:
+            shutil.rmtree(runs_dir)
+            print(f"   ✅ Usunięto folder: runs/")
+            removed += 1
+        except Exception as e:
+            print(f"   ⚠️  Nie można usunąć runs/: {e}")
+    
     if removed == 0:
         print("   ℹ️  Brak plików do usunięcia (czysty start)")
     else:
-        print(f"\n✅ Wyczyszczono {removed} plików")
+        print(f"\n✅ Wyczyszczono {removed} plików/folderów")
     
     return True
 
@@ -204,9 +288,9 @@ def step2_prepare_training_data(matched_csv: str, db_path: str, output_dir: str)
         return False
 
 
-def step3_train_model(data_dir: str, checkpoint_dir: str, num_epochs: int = 100, model_type: str = 'standard') -> bool:
+def step3_train_model(data_dir: str, checkpoint_dir: str, num_epochs: int = 100) -> bool:
     """
-    Krok 3: Trenowanie modelu (opcjonalny).
+    Krok 3: Trenowanie modelu.
     
     Args:
         data_dir: Folder z danymi treningowymi
@@ -243,11 +327,14 @@ def step3_train_model(data_dir: str, checkpoint_dir: str, num_epochs: int = 100,
         
         # Utwórz model
         input_dim = X_train.shape[1]
-        print(f"   Architektura: {model_type}")
-        model = create_model(input_dim, model_type=model_type)
+        model = create_model(input_dim)
         
         # Utwórz trainera
-        trainer = MovieRatingTrainer(model, learning_rate=0.001)
+        trainer = MovieRatingTrainer(
+            model, 
+            learning_rate=0.001,
+            input_dim=input_dim
+        )
         
         # Trening
         print(f"\n🚀 Trening ({num_epochs} epok)...\n")
@@ -385,30 +472,27 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Przykłady użycia:
-  # Tylko rekomendacje (używa istniejącego modelu):
-  python pipeline.py --user letterboxd-plisiu-2025-12-04-11-19-utc
+  # Interaktywny wybór użytkownika (domyślnie 100 epok, 20 rekomendacji):
+  python pipeline.py
   
-  # Z treningiem modelu:
-  python pipeline.py --user letterboxd-plisiu-2025-12-04-11-19-utc --train
+  # Bezpośredni wybór użytkownika:
+  python pipeline.py --user letterboxd-plisiu-2025-12-04-11-19-utc
   
   # Zmiana liczby rekomendacji:
   python pipeline.py --user letterboxd-plisiu-2025-12-04-11-19-utc --n 30
   
-  # Pełny pipeline z treningiem (100 epok):
-  python pipeline.py --user letterboxd-plisiu-2025-12-04-11-19-utc --train --epochs 100
+  # Szybki trening (50 epok):
+  python pipeline.py --user letterboxd-plisiu-2025-12-04-11-19-utc --epochs 50
+  
+  # Wybór architektury:
+  python pipeline.py --user letterboxd-plisiu-2025-12-04-11-19-utc
         """
     )
     
     parser.add_argument(
         '--user',
-        required=True,
-        help='Nazwa folderu użytkownika w database_user/ (np. letterboxd-plisiu-2025-12-04-11-19-utc)'
-    )
-    
-    parser.add_argument(
-        '--train',
-        action='store_true',
-        help='Czy trenować model od nowa (domyślnie używa istniejącego modelu)'
+        required=False,
+        help='Nazwa folderu użytkownika w database_user/ (np. letterboxd-plisiu-2025-12-04-11-19-utc). Jeśli nie podano, zostanie wyświetlona lista do wyboru.'
     )
     
     parser.add_argument(
@@ -443,19 +527,30 @@ Przykłady użycia:
         help='Pomiń czyszczenie plików tymczasowych (może spowodować konflikty między użytkownikami!)'
     )
     
-    parser.add_argument(
-        '--model',
-        type=str,
-        default='advanced',
-        choices=['standard', 'deep', 'advanced'],
-        help='Architektura modelu: standard (szybka, ~86k), deep (~340k), advanced (najlepsza, ~530k)'
-    )
-    
     args = parser.parse_args()
     
     # Ścieżki
     base_dir = Path(__file__).parent
-    user_folder = base_dir / "database_user" / args.user
+    database_user_dir = base_dir / "database_user"
+    
+    # 🎯 WYBÓR UŻYTKOWNIKA NA SAMYM POCZĄTKU
+    # Jeśli nie podano użytkownika, pokaż interaktywny wybór
+    if not args.user:
+        selected_user = select_user_interactive(database_user_dir)
+        args.user = selected_user
+    
+    user_folder = database_user_dir / args.user
+    
+    # Walidacja folderu użytkownika
+    if not user_folder.exists():
+        print(f"❌ Folder użytkownika nie istnieje: {user_folder}")
+        print(f"💡 Dostępne foldery w database_user/:")
+        for folder in database_user_dir.iterdir():
+            if folder.is_dir() and folder.name.startswith("letterboxd-"):
+                print(f"   - {folder.name}")
+        return 1
+    
+    # Ścieżki dla tego użytkownika
     db_path = base_dir / "database" / "movies.db"
     matched_csv = base_dir / "src" / "data" / "matched_movies.csv"
     prepared_dir = base_dir / "src" / "data" / "prepared"
@@ -464,25 +559,22 @@ Przykłady użycia:
     enriched_data_path = prepared_dir / "enriched_movies.csv"
     encoders_path = prepared_dir / "encoders.pkl"
     
-    # Walidacja
-    if not user_folder.exists():
-        print(f"❌ Folder użytkownika nie istnieje: {user_folder}")
-        print(f"💡 Dostępne foldery w database_user/:")
-        for folder in (base_dir / "database_user").iterdir():
-            if folder.is_dir() and folder.name.startswith("letterboxd-"):
-                print(f"   - {folder.name}")
-        return 1
-    
+    # Walidacja bazy danych
     if not check_database_exists(db_path):
         return 1
     
+    # 📋 PODSUMOWANIE KONFIGURACJI
     print("\n" + "="*100)
     print("🎬 PIPELINE REKOMENDACJI FILMÓW")
     print("="*100)
-    print(f"Użytkownik: {args.user}")
-    print(f"Architektura: {args.model}")
-    print(f"Trening modelu: {'TAK' if args.train else 'NIE'}")
-    print(f"Liczba rekomendacji: {args.n}")
+    print(f"👤 Użytkownik: {args.user}")
+    print(f"🔄 Liczba epok: {args.epochs}")
+    print(f"🎯 Liczba rekomendacji: {args.n}")
+    print("="*100)
+    if args.skip_cleanup:
+        print(f"💡 Pliki tymczasowe zostaną zachowane (--skip-cleanup)")
+    else:
+        print(f"💡 Pliki tymczasowe zostaną usunięte po zakończeniu")
     print("="*100)
     
     # KROK 0: Czyszczenie plików tymczasowych
@@ -518,21 +610,12 @@ Przykłady użycia:
             return 1
     
     # KROK 3: Trenowanie modelu
-    # WAŻNE: Zawsze trenujemy model dla nowych danych użytkownika!
-    # Model musi być zgodny z enkoderami użytkownika (różne liczby gatunków/aktorów/reżyserów)
-    if args.train or not args.skip_match or not args.skip_prepare:
-        # Jeśli przetwarzaliśmy dane, trenuj model
-        print(f"\n💡 Model będzie wytrenowany dla danych użytkownika (architektura: {args.model})...")
-        if not step3_train_model(str(prepared_dir), str(checkpoint_dir), args.epochs, args.model):
-            print("\n❌ Pipeline przerwany na kroku 3")
-            return 1
-    else:
-        # Tylko jeśli jawnie pomijamy wszystko
-        print("\n⏭️  Pomijam krok 3 (trening modelu)")
-        if not check_model_exists(model_path):
-            print(f"❌ Model nie istnieje: {model_path}")
-            print(f"💡 Usuń flagi --skip-* aby wytrenować model")
-            return 1
+    # WAŻNE: Model jest ZAWSZE trenowany dla wybranego użytkownika!
+    # Każdy użytkownik ma unikalne enkodery (różne gatunki/aktorzy/reżyserzy)
+    print(f"\n💡 Trenuję model dla użytkownika {args.user}...")
+    if not step3_train_model(str(prepared_dir), str(checkpoint_dir), args.epochs):
+        print("\n❌ Pipeline przerwany na kroku 3")
+        return 1
     
     # KROK 4: Generowanie rekomendacji
     if not step4_generate_recommendations(
@@ -549,6 +632,20 @@ Przykłady użycia:
     print("\n" + "="*100)
     print("🎉 PIPELINE ZAKOŃCZONY POMYŚLNIE!")
     print("="*100)
+    
+    # KROK 5: Czyszczenie plików tymczasowych
+    if not args.skip_cleanup:
+        print("\n" + "="*100)
+        print("🧹 CZYSZCZENIE PLIKÓW TYMCZASOWYCH")
+        print("="*100)
+        
+        data_dir = base_dir / "src" / "data"
+        step0_cleanup_temp_files(data_dir, skip_cleanup=False)
+        
+        print("\n✅ Pliki tymczasowe zostały usunięte")
+    else:
+        print(f"\n💡 Pliki tymczasowe zachowane (--skip-cleanup)")
+        print(f"   matched_movies.csv, encoders.pkl, best_model.pth")
     
     return 0
 

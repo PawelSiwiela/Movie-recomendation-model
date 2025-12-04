@@ -40,6 +40,12 @@ class DataPreparer:
         result = pd.read_sql_query(query, self.conn, params=(movie_id,))
         return result['name'].tolist()
     
+    def get_all_genres_from_db(self) -> list:
+        """Pobiera wszystkie unikalne gatunki z bazy danych."""
+        query = "SELECT DISTINCT name FROM genres ORDER BY name"
+        result = pd.read_sql_query(query, self.conn)
+        return result['name'].tolist()
+    
     def get_movie_director(self, movie_id: int) -> str:
         """Pobiera reżysera filmu."""
         query = """
@@ -104,9 +110,10 @@ class DataPreparer:
         features['tmdb_popularity'] = self.df['tmdb_popularity'].values
         features['year'] = self.df['tmdb_year'].values
         
-        # 2. Gatunki (multi-hot encoding)
+        # 2. Gatunki (multi-hot encoding) - użyj WSZYSTKICH gatunków z bazy
         print("   Encoding gatunków...")
-        mlb_genres = MultiLabelBinarizer()
+        all_genres = self.get_all_genres_from_db()
+        mlb_genres = MultiLabelBinarizer(classes=all_genres)
         genres_encoded = mlb_genres.fit_transform(self.df['genres'])
         features['genres'] = genres_encoded
         
@@ -115,15 +122,16 @@ class DataPreparer:
         # 3. Reżyserzy (one-hot dla najpopularniejszych, "other" dla reszty)
         print("   Encoding reżyserów...")
         director_counts = self.df['director'].value_counts()
-        top_directors = set(director_counts.head(50).index)  # Top 50 reżyserów
+        top_directors_list = list(director_counts.head(50).index)  # Top 50 reżyserów (lista dla kolejności)
+        top_directors_set = set(top_directors_list)  # Set dla szybkiego wyszukiwania
         
         self.df['director_category'] = self.df['director'].apply(
-            lambda x: x if x in top_directors else 'other'
+            lambda x: x if x in top_directors_set else 'other'
         )
         directors_encoded = pd.get_dummies(self.df['director_category'], prefix='dir')
         features['directors'] = directors_encoded.values
         
-        print(f"   Znaleziono {len(top_directors)} popularnych reżyserów + category 'other'")
+        print(f"   Znaleziono {len(top_directors_list)} popularnych reżyserów + category 'other'")
         
         # 4. Aktorzy (binarny: czy dany aktor występuje)
         print("   Encoding aktorów...")
@@ -133,7 +141,7 @@ class DataPreparer:
             all_actors.extend(actors_list)
         
         actor_counts = pd.Series(all_actors).value_counts()
-        top_actors = set(actor_counts.head(100).index)  # Top 100 aktorów
+        top_actors = list(actor_counts.head(100).index)  # Top 100 aktorów (lista dla zachowania kolejności)
         
         actors_binary = np.zeros((len(self.df), len(top_actors)))
         actor_to_idx = {actor: i for i, actor in enumerate(top_actors)}
@@ -147,11 +155,17 @@ class DataPreparer:
         
         print(f"   Znaleziono {len(top_actors)} popularnych aktorów")
         
-        # 5. Type (movie vs tv)
+        # 5. Type (movie vs tv) - ZAWSZE 2 kolumny niezależnie od danych
         type_encoded = pd.get_dummies(self.df['tmdb_type'], prefix='type')
+        # Dodaj brakujące kolumny jeśli nie istnieją
+        for col in ['type_movie', 'type_tv']:
+            if col not in type_encoded.columns:
+                type_encoded[col] = 0
+        # Sortuj kolumny alfabetycznie dla spójności
+        type_encoded = type_encoded[['type_movie', 'type_tv']]
         features['type'] = type_encoded.values
         
-        # Połącz wszystkie features
+        # Połącz wszystkie features - wymuszenie float64 dla wszystkich
         X = np.concatenate([
             features['tmdb_rating'].reshape(-1, 1),
             features['tmdb_popularity'].reshape(-1, 1),
@@ -160,7 +174,7 @@ class DataPreparer:
             features['directors'],
             features['actors'],
             features['type']
-        ], axis=1)
+        ], axis=1).astype(np.float64)
         
         # Target (user rating)
         y = self.df['user_rating'].values
@@ -175,8 +189,8 @@ class DataPreparer:
         
         # Zapisz encodery do późniejszego użycia
         self.mlb_genres = mlb_genres
-        self.top_directors = top_directors
-        self.top_actors = list(top_actors)
+        self.top_directors = top_directors_list  # Lista dla zachowania kolejności
+        self.top_actors = top_actors  # Już jest listą
         self.actor_to_idx = actor_to_idx
         
         return X, y

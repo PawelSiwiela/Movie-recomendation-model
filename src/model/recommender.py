@@ -75,47 +75,41 @@ class MovieRecommender:
         # Załaduj checkpoint najpierw, żeby sprawdzić wymiar modelu
         checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
         
-        # Wykryj input_dim z zapisanego modelu (szukaj pierwszej warstwy Linear)
-        state_dict = checkpoint['model_state_dict']
-        input_dim = None
-        model_type_detected = 'standard'
-        
-        # Próbuj różne możliwe klucze dla pierwszej warstwy
-        possible_keys = [
-            'model.0.weight',           # MovieRecommenderNet (standard)
-            'input_layer.0.weight',     # MovieRecommenderNetDeep, MovieRecommenderNetAdvanced
-            'attention.0.weight'        # Jeśli attention jest pierwsza
-        ]
-        
-        for key in possible_keys:
-            if key in state_dict:
-                input_dim = state_dict[key].shape[1]  # [out_features, in_features]
-                print(f"   Wykryto wymiar modelu: {input_dim} (z klucza: {key})")
-                break
-        
-        if input_dim is None:
-            # Fallback - znajdź pierwszą warstwę Linear
-            for key, param in state_dict.items():
-                if 'weight' in key and len(param.shape) == 2:
-                    input_dim = param.shape[1]
+        # Najpierw spróbuj użyć zapisanych metadanych (nowsze checkpointy)
+        if 'input_dim' in checkpoint:
+            input_dim = checkpoint['input_dim']
+            print(f"   Wykryto wymiar modelu: {input_dim} (z metadanych)")
+        else:
+            # Fallback dla starszych checkpointów bez metadanych
+            print("   ⚠️  Stary checkpoint bez metadanych, wykrywam wymiary...")
+            state_dict = checkpoint['model_state_dict']
+            input_dim = None
+            
+            # Próbuj różne możliwe klucze dla pierwszej warstwy
+            possible_keys = [
+                'input_layer.0.weight',     # MovieRecommenderNet input layer
+                'attention.0.weight'        # Jeśli attention jest pierwsza
+            ]
+            
+            for key in possible_keys:
+                if key in state_dict:
+                    input_dim = state_dict[key].shape[1]  # [out_features, in_features]
                     print(f"   Wykryto wymiar modelu: {input_dim} (z klucza: {key})")
                     break
+            
+            if input_dim is None:
+                # Fallback - znajdź pierwszą warstwę Linear
+                for key, param in state_dict.items():
+                    if 'weight' in key and len(param.shape) == 2:
+                        input_dim = param.shape[1]
+                        print(f"   Wykryto wymiar modelu: {input_dim} (z klucza: {key})")
+                        break
+            
+            if input_dim is None:
+                raise ValueError("Nie można wykryć wymiaru wejściowego modelu z checkpoint!")
         
-        if input_dim is None:
-            raise ValueError("Nie można wykryć wymiaru wejściowego modelu z checkpoint!")
-        
-        # Wykryj typ modelu z kluczy w state_dict
-        if 'attention.0.weight' in state_dict:
-            model_type_detected = 'advanced'
-        elif 'input_layer.0.weight' in state_dict and 'hidden_layers' in str(state_dict.keys()):
-            model_type_detected = 'deep'
-        else:
-            model_type_detected = 'standard'
-        
-        print(f"   Wykryto architekturę: {model_type_detected}")
-        
-        # Utwórz model o odpowiednim rozmiarze i typie
-        self.model = create_model(input_dim, model_type=model_type_detected)
+        # Utwórz model o odpowiednim rozmiarze
+        self.model = create_model(input_dim)
         
         # Załaduj wagi
         self.model.load_state_dict(checkpoint['model_state_dict'])
@@ -173,26 +167,42 @@ class MovieRecommender:
         if result.empty:
             return None
         
-        # Konwertuj stringi na listy
-        row = result.iloc[0]
-        if pd.notna(row['genres']):
-            row['genres'] = str(row['genres'].split(','))
+        # Konwertuj stringi na listy i upewnij się że wszystkie wartości są poprawne
+        row = result.iloc[0].copy()
+        
+        # Gatunki
+        if pd.notna(row['genres']) and row['genres']:
+            row['genres'] = str([g.strip() for g in row['genres'].split(',')])
         else:
             row['genres'] = '[]'
         
-        if pd.notna(row['actors']):
-            row['actors'] = str(row['actors'].split(','))
+        # Aktorzy
+        if pd.notna(row['actors']) and row['actors']:
+            row['actors'] = str([a.strip() for a in row['actors'].split(',')])
         else:
             row['actors'] = '[]'
         
+        # Reżyser - upewnij się że nie jest None
+        if pd.isna(row['director']) or not row['director']:
+            row['director'] = 'Unknown'
+        
+        # Upewnij się że numeryczne wartości nie są None
+        if pd.isna(row.get('tmdb_rating')):
+            row['tmdb_rating'] = 0.0
+        if pd.isna(row.get('tmdb_popularity')):
+            row['tmdb_popularity'] = 0.0
+        if pd.isna(row.get('year')):
+            row['year'] = 2000
+        
         return row
     
-    def _create_features(self, movie_row: pd.Series) -> np.ndarray:
+    def _create_features(self, movie_row: pd.Series, debug=False) -> np.ndarray:
         """
         Tworzy wektor cech dla pojedynczego filmu.
         
         Args:
             movie_row: Wiersz z DataFrame zawierający dane filmu
+            debug: Czy wyświetlać informacje debugowania
             
         Returns:
             Wektor cech (177 wymiarów)
@@ -200,20 +210,36 @@ class MovieRecommender:
         features = []
         
         # 1. Cechy numeryczne (3)
-        numerical = np.array([
-            movie_row.get('tmdb_rating', movie_row.get('vote_average', 0)),
-            movie_row.get('tmdb_popularity', movie_row.get('popularity', 0)),
-            movie_row.get('tmdb_year', movie_row.get('year', 2000))
-        ]).reshape(1, -1)
+        rating = movie_row.get('tmdb_rating', movie_row.get('rating', movie_row.get('vote_average', 0)))
+        popularity = movie_row.get('tmdb_popularity', movie_row.get('popularity', 0))
+        year = movie_row.get('tmdb_year', movie_row.get('year', 2000))
+        
+        numerical = np.array([rating, popularity, year]).reshape(1, -1)
         numerical_scaled = self.scaler.transform(numerical)[0]
         features.extend(numerical_scaled)
         
+        if debug:
+            print(f"  Numerical: rating={rating}, popularity={popularity}, year={year}")
+            print(f"  Scaled: {numerical_scaled}")
+        
         # 2. Gatunki (21) - multi-hot encoding
-        genres = eval(movie_row['genres']) if isinstance(movie_row['genres'], str) else []
+        try:
+            if isinstance(movie_row['genres'], str):
+                genres = eval(movie_row['genres'])
+            elif isinstance(movie_row['genres'], list):
+                genres = movie_row['genres']
+            else:
+                genres = []
+        except:
+            genres = []
+        
         # Filtruj tylko znane gatunki aby uniknąć ostrzeżeń
         known_genres = [g for g in genres if g in self.genre_encoder.classes_]
         genre_vector = self.genre_encoder.transform([known_genres])[0]
         features.extend(genre_vector)
+        
+        if debug:
+            print(f"  Genres: {genres[:5]} -> Known: {known_genres}")
         
         # 3. Reżyser - one-hot encoding (dynamiczny wymiar!)
         director = movie_row['director']
@@ -226,7 +252,16 @@ class MovieRecommender:
         features.extend(director_vector)
         
         # 4. Aktorzy - binary encoding (dynamiczny wymiar!)
-        actors = eval(movie_row['actors']) if isinstance(movie_row['actors'], str) else []
+        try:
+            if isinstance(movie_row['actors'], str):
+                actors = eval(movie_row['actors'])
+            elif isinstance(movie_row['actors'], list):
+                actors = movie_row['actors']
+            else:
+                actors = []
+        except:
+            actors = []
+        
         actor_vector = np.zeros(self.n_actors)
         for actor in actors[:5]:  # Top 5 actors z filmu
             if actor in self.actor_to_idx:
@@ -235,11 +270,19 @@ class MovieRecommender:
                     actor_vector[idx] = 1
         features.extend(actor_vector)
         
-        # 5. Typ - one-hot encoding (zawsze 1 kolumna z pd.get_dummies!)
+        if debug:
+            print(f"  Actors: {actors[:3]} -> Vector non-zero: {actor_vector.sum()}")
+        
+        # 5. Typ - one-hot encoding (2 kolumny jak pd.get_dummies!)
         movie_type = movie_row.get('tmdb_type', movie_row.get('type', 'movie'))
-        # pd.get_dummies tworzy 1 kolumnę, nie 2!
-        type_value = 1 if movie_type == 'movie' else 0
-        features.append(type_value)
+        # pd.get_dummies tworzy 2 kolumny: type_movie i type_tv
+        type_movie = 1 if movie_type == 'movie' else 0
+        type_tv = 1 if movie_type == 'tv' else 0
+        features.append(type_movie)
+        features.append(type_tv)
+        
+        if debug:
+            print(f"  Type: {movie_type} -> [movie={type_movie}, tv={type_tv}]")
         
         return np.array(features, dtype=np.float32)
     
@@ -272,9 +315,8 @@ class MovieRecommender:
             X = torch.FloatTensor(features).unsqueeze(0).to(self.device)
             prediction = self.model(X).item()
         
-        # Zaokrąglij do najbliższej 0.5 (skala Letterboxd: 0, 0.5, 1.0, 1.5, ..., 5.0)
-        prediction = round(prediction * 2) / 2
-        prediction = max(0.0, min(5.0, prediction))  # Ogranicz do 0-5
+        # Ogranicz do 0-5 (bez zaokrąglania)
+        prediction = max(0.0, min(5.0, prediction))
         
         return prediction
     
@@ -398,8 +440,7 @@ class MovieRecommender:
                 with torch.no_grad():
                     X = torch.FloatTensor(features).unsqueeze(0).to(self.device)
                     pred = self.model(X).item()
-                    # Zaokrąglij do 0.5
-                    pred = round(pred * 2) / 2
+                    # Ogranicz do 0-5 (bez zaokrąglania)
                     pred = max(0.0, min(5.0, pred))
                 predictions.append(pred)
             except Exception as e:
