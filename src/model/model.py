@@ -101,7 +101,7 @@ class MovieRecommenderNet(nn.Module):
             nn.Linear(hidden_dims[-1], 1),
             nn.Sigmoid()
         )
-        self.output_scale = 5.0
+
     
     def forward(self, x):
         """
@@ -111,7 +111,7 @@ class MovieRecommenderNet(nn.Module):
             x: Input tensor (batch_size, input_dim)
             
         Returns:
-            Predicted ratings (batch_size, 1) w zakresie 0-5
+            Predicted scores (batch_size, 1) w zakresie 0-1
         """
         # Optional attention
         if self.use_attention:
@@ -124,7 +124,7 @@ class MovieRecommenderNet(nn.Module):
         for block in self.residual_blocks:
             x = block(x)
         
-        return self.output_layer(x).squeeze(1) * self.output_scale
+        return self.output_layer(x).squeeze(1)
 
 
 def create_model(input_dim: int, **kwargs):

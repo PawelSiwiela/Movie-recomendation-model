@@ -1,8 +1,8 @@
 """Parser dla danych eksportowanych z Letterboxd."""
 
-import pandas as pd
+from typing import Optional, Dict
 from pathlib import Path
-from typing import Optional, Dict, List
+import pandas as pd
 
 class LetterboxdParser:
     """Klasa do parsowania eksportów CSV z Letterboxd."""

@@ -10,6 +10,7 @@ from pathlib import Path
 import sqlite3
 import pandas as pd
 from difflib import SequenceMatcher
+import argparse
 
 # Dodaj ścieżki do importów
 project_root = Path(__file__).parent.parent.parent
@@ -392,28 +393,30 @@ def save_matched_movies(matched_df: pd.DataFrame, output_path: str):
 
 
 if __name__ == "__main__":
-    # Ścieżki (bezwzględne)
-    project_root = Path(__file__).parent.parent.parent
-    LETTERBOXD_FOLDER = str(project_root / "database_user" / "letterboxd-paesielawa-2025-12-03-23-47-utc")
-    TMDB_DB_PATH = str(project_root / "database" / "movies.db")
-    OUTPUT_CSV = str(project_root / "src" / "data" / "matched_movies.csv")
-    
+    parser = argparse.ArgumentParser(description="Match Letterboxd ratings to a local TMDB database.")
+    parser.add_argument("letterboxd_folder", type=str, help="Path to the directory with Letterboxd CSV files.")
+    parser.add_argument("--db_path", type=str, default="database/movies.db", help="Path to the TMDB SQLite database file.")
+    parser.add_argument("--output_matched", type=str, default="src/data/matched_movies.csv", help="Output path for matched movies CSV.")
+    parser.add_argument("--output_unmatched", type=str, default="src/data/unmatched_movies.csv", help="Output path for unmatched movies CSV.")
+    parser.add_argument("--min_similarity", type=float, default=0.85, help="Minimum title similarity for a match (0.0 to 1.0).")
+
+    args = parser.parse_args()
+
     # Dopasuj filmy
     matched_df, unmatched_df = match_user_movies_to_tmdb(
-        letterboxd_folder=LETTERBOXD_FOLDER,
-        tmdb_db_path=TMDB_DB_PATH,
-        min_similarity=0.85
+        letterboxd_folder=args.letterboxd_folder,
+        tmdb_db_path=args.db_path,
+        min_similarity=args.min_similarity
     )
-    
+
     # Zapisz wyniki
     if len(matched_df) > 0:
-        save_matched_movies(matched_df, OUTPUT_CSV)
-        
+        save_matched_movies(matched_df, args.output_matched)
+
         print(f"\n🎬 Przykłady dopasowanych filmów:")
         print(matched_df[['user_title', 'tmdb_title', 'user_rating', 'similarity']].head(10))
-    
+
     # Opcjonalnie zapisz niedopasowane
     if len(unmatched_df) > 0:
-        unmatched_path = str(project_root / "src" / "data" / "unmatched_movies.csv")
-        unmatched_df.to_csv(unmatched_path, index=False)
-        print(f"\n💾 Niedopasowane filmy zapisane do: {unmatched_path}")
+        unmatched_df.to_csv(args.output_unmatched, index=False)
+        print(f"\n💾 Niedopasowane filmy zapisane do: {args.output_unmatched}")

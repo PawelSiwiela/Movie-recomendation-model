@@ -51,6 +51,7 @@ data/*.db
 # User data (prywatne) - dane użytkowników Letterboxd
 database_user/letterboxd-paesielawa-*
 database_user/letterboxd-plisiu-*
+database_user/letterboxd-kabarecik-*
 database_user/*.csv
 database_user/filmweb-*/
 user_data/letterboxd-*/

@@ -314,29 +314,66 @@ def step3_train_model(data_dir: str, checkpoint_dir: str, num_epochs: int = 100)
         # Załaduj dane
         print("📂 Ładuję dane...")
         X_train = np.load(data_dir / "X_train.npy")
-        X_test = np.load(data_dir / "X_test.npy")
+        X_test = np.load(data_dir / "X_test.npy")  # To jest validation set (10%)
         y_train = np.load(data_dir / "y_train.npy")
-        y_test = np.load(data_dir / "y_test.npy")
+        y_test = np.load(data_dir / "y_test.npy")  # To jest validation set (10%)
         
-        print(f"   Train: {X_train.shape}, Test: {X_test.shape}")
+        total_samples = len(X_train) + len(X_test)
+        print(f"   Train: {X_train.shape} ({len(X_train)}/{total_samples} filmów użytkownika)")
+        print(f"   Validation: {X_test.shape} ({len(X_test)}/{total_samples} filmów użytkownika)")
+        print(f"   💡 Model uczy się na {total_samples} filmach (90% train + 10% validation)")
+        
+        # Dynamiczny batch size dostosowany do wielkości zbioru
+        train_size = len(X_train)
+        if train_size < 100:
+            batch_size = 8  # Bardzo mały zbiór (< 100 próbek)
+        elif train_size < 200:
+            batch_size = 16  # Mały zbiór (100-200 próbek)
+        elif train_size < 500:
+            batch_size = 32  # Średni zbiór (200-500 próbek)
+        elif train_size < 2000:
+            batch_size = 64  # Duży zbiór (500-2000 próbek)
+        else:
+            batch_size = 128  # Bardzo duży zbiór (>2000 próbek)
+        
+        print(f"   Batch size: {batch_size} (dostosowany do {train_size} próbek treningowych)")
+        
+        # Dostosuj parametry treningu do wielkości zbioru
+        if train_size < 150:
+            # Bardzo mały zbiór: więcej regularyzacji, wolniejsze uczenie
+            learning_rate = 0.0005  # Mniejszy LR
+            dropout_rate = 0.5  # Większy dropout
+            early_stopping_patience = 20  # Więcej cierpliwości
+            print(f"   ⚙️  Parametry dla małego zbioru: LR={learning_rate}, Dropout={dropout_rate}, Patience={early_stopping_patience}")
+        elif train_size < 300:
+            # Mały zbiór: umiarkowana regularyzacja
+            learning_rate = 0.0007
+            dropout_rate = 0.4
+            early_stopping_patience = 17
+            print(f"   ⚙️  Parametry dla średniego zbioru: LR={learning_rate}, Dropout={dropout_rate}, Patience={early_stopping_patience}")
+        else:
+            # Standardowe parametry dla dużych zbiorów
+            learning_rate = 0.001
+            dropout_rate = 0.3
+            early_stopping_patience = 15
         
         # Utwórz DataLoadery
         train_loader, val_loader = create_dataloaders(
-            X_train, y_train, X_test, y_test, batch_size=32
+            X_train, y_train, X_test, y_test, batch_size=batch_size
         )
         
-        # Utwórz model
+        # Utwórz model z dostosowanym dropout
         input_dim = X_train.shape[1]
-        model = create_model(input_dim)
+        model = create_model(input_dim, dropout_rate=dropout_rate)
         
-        # Utwórz trainera
+        # Utwórz trainera z dostosowanym learning rate
         trainer = MovieRatingTrainer(
             model, 
-            learning_rate=0.001,
+            learning_rate=learning_rate,
             input_dim=input_dim
         )
         
-        # Trening
+        # Trening z dostosowaną cierpliwością
         print(f"\n🚀 Trening ({num_epochs} epok)...\n")
         
         tensorboard_dir = Path(checkpoint_dir).parent / "runs" / f"training_{int(time.time())}"
@@ -345,7 +382,7 @@ def step3_train_model(data_dir: str, checkpoint_dir: str, num_epochs: int = 100)
             train_loader,
             val_loader,
             num_epochs=num_epochs,
-            early_stopping_patience=15,
+            early_stopping_patience=early_stopping_patience,
             checkpoint_dir=checkpoint_dir,
             tensorboard_dir=str(tensorboard_dir)
         )
