@@ -36,27 +36,44 @@ Model uczący się na podstawie preferencji użytkownika (oceny z Letterboxd/Fil
 └── README.md
 ```
 
-## Setup Instructions
+## 🚀 Szybki start
 
-1. Clone the repository:
-   ```
-   git clone <https://github.com/PaeSielawa/Movie-recomendation-model>
-   ```
-2. Navigate to the project directory:
-   ```
-   cd movie-recommendation-system
-   ```
-3. Install the required dependencies:
-
-   ```
-   pip install -r requirements.txt
-   ```
-
-4. Pobierz bazę filmów z TMDB:
+### 1. Instalacja
 
 ```bash
-python src/database/database_fetcher.py
+git clone https://github.com/PaeSielawa/Movie-recomendation-model
+cd Movie-recomendation-model
+pip install -r requirements.txt
 ```
+
+### 2. Pobierz bazę danych TMDB (raz, ~10 min)
+
+```bash
+python database/daily_export_fetcher.py
+```
+
+### 3. Umieść eksport Letterboxd w `database_user/`
+
+Pobierz swoje dane z Letterboxd i wypakuj folder do `database_user/`.
+
+### 4. Uruchom pipeline 🎬
+
+```bash
+# Rekomendacje dla nowego użytkownika (używa istniejącego modelu)
+python pipeline.py --user letterboxd-nazwauzytkownika-2025-12-04
+
+# LUB z treningiem modelu od nowa
+python pipeline.py --user letterboxd-nazwauzytkownika-2025-12-04 --train
+```
+
+**To wszystko!** Pipeline automatycznie:
+
+- ✅ Dopasuje filmy do bazy TMDB
+- ✅ Przygotuje dane treningowe
+- ✅ (Opcjonalnie) Wytrenuje model
+- ✅ Wygeneruje 20 rekomendacji filmów + 20 seriali
+
+📖 **Więcej opcji:** Zobacz [PIPELINE_USAGE.md](PIPELINE_USAGE.md)
 
 ## 📊 Źródła danych
 

@@ -1,568 +1,98 @@
 user_title,user_year,user_rating,tmdb_id,tmdb_movie_id,tmdb_title,tmdb_year,tmdb_rating,tmdb_popularity,tmdb_type,similarity,match_method
-Dungeons & Dragons: Honor Among Thieves,2023,5.0,1919,493529,Dungeons & Dragons: Honor Among Thieves,2023,7.334,7.095,movie,1.0,title
-Guy Ritchie's The Covenant,2023,3.0,732,882569,Guy Ritchie's The Covenant,2023,7.7,8.3055,movie,1.0,title
-Barbie,2023,4.0,3689,346698,Barbie,2023,6.944,16.7899,movie,1.0,title
-John Wick: Chapter 4,2023,3.0,767,603692,John Wick: Chapter 4,2023,7.7,15.0447,movie,1.0,title
-Babylon,2022,3.5,1771,615777,Babylon,2022,7.371,6.5382,movie,1.0,title
-Avatar: The Way of Water,2022,2.5,996,76600,Avatar: The Way of Water,2022,7.6,28.5891,movie,1.0,title
-Cyberpunk: Edgerunners,2022,4.5,10593,105248,Cyberpunk: Edgerunners,2022,8.5,9.0291,tv,1.0,title
-TÁR,2022,2.0,3004,817758,TÁR,2022,7.088,3.0595,movie,1.0,title
-The Menu,2022,4.5,2638,593643,The Menu,2022,7.171,11.8089,movie,1.0,title
-Glass Onion,2022,3.0,3239,661374,Glass Onion: A Knives Out Mystery,2022,7.038,8.0615,movie,0.95,substring
-All Quiet on the Western Front,2022,4.0,752,49046,All Quiet on the Western Front,2022,7.722,7.3875,movie,1.0,title
-The Banshees of Inisherin,2022,4.0,1455,674324,The Banshees of Inisherin,2022,7.455,5.6917,movie,1.0,title
-Decision to Leave,2022,4.0,1938,705996,Decision to Leave,2022,7.329,7.0283,movie,1.0,title
-Top Gun: Maverick,2022,4.0,145,361743,Top Gun: Maverick,2022,8.164,17.9089,movie,1.0,title
-The Northman,2022,3.0,3255,639933,The Northman,2022,7.036,6.9218,movie,1.0,title
-Everything Everywhere All at Once,2022,4.5,741,545611,Everything Everywhere All at Once,2022,7.7,11.4932,movie,1.0,title
-The Batman,2022,4.0,881,414906,The Batman,2022,7.659,12.063,movie,1.0,title
-No Time to Die,2021,4.0,1824,370172,No Time to Die,2021,7.355,9.0637,movie,1.0,title
-"tick, tick... BOOM!",2021,4.0,1000,537116,"tick, tick... BOOM!",2021,7.609,1.6486,movie,1.0,title
-Last Night in Soho,2021,3.5,2143,576845,Last Night in Soho,2021,7.282,5.0551,movie,1.0,title
-Dune,2021,5.0,647,438631,Dune,2021,7.777,18.5624,movie,1.0,title
-C'mon C'mon,2021,4.0,2493,632617,C'mon C'mon,2021,7.2,2.3063,movie,1.0,title
-Drive My Car,2021,4.0,1538,758866,Drive My Car,2021,7.434,5.0994,movie,1.0,title
-The Worst Person in the World,2021,5.0,1528,660120,The Worst Person in the World,2021,7.437,6.0713,movie,1.0,title
-Malcolm & Marie,2021,2.5,3331,722913,Malcolm & Marie,2021,7.0,1.1025,movie,1.0,title
-Another Round,2020,5.0,930,580175,Another Round,2020,7.637,6.3148,movie,1.0,title
-Knives Out,2019,4.5,521,546554,Knives Out,2019,7.8,17.9322,movie,1.0,title
-The Champion,2020,3.0,5250,589524,The Champion,2019,6.641,2.4664,movie,1.0,title
-Tenet,2020,3.0,2612,577922,Tenet,2020,7.177,7.6003,movie,1.0,title
-Mank,2020,3.0,5026,614560,Mank,2020,6.683,3.0286,movie,1.0,title
-The Queen's Gambit,2020,4.5,10571,87739,The Queen's Gambit,2020,8.453,9.3088,tv,1.0,title
-1917,2019,4.0,311,530915,1917,2019,7.986,8.9186,movie,1.0,title
-American Hustle,2013,3.0,4146,168672,American Hustle,2013,6.9,3.2141,movie,1.0,title
-Rocketman,2019,4.0,2015,504608,Rocketman,2019,7.3,2.2145,movie,1.0,title
-Once Upon a Time... in Hollywood,2019,3.5,1565,466272,Once Upon a Time... in Hollywood,2019,7.426,10.4788,movie,1.0,title
-Spider-Man: Into the Spider-Verse,2018,4.5,36,324857,Spider-Man: Into the Spider-Verse,2018,8.395,12.0519,movie,1.0,title
-John Wick: Chapter 3 – Parabellum,2019,3.0,1499,458156,John Wick: Chapter 3 - Parabellum,2019,7.445,9.5897,movie,1.0,title
-Chernobyl,2019,4.5,10231,87108,Chernobyl,2019,8.7,18.1872,tv,1.0,title
-"Love, Death & Robots: Three Robots",2019,4.5,10304,86831,"Love, Death & Robots",2019,8.226,15.3308,tv,0.95,substring
-Vice,2018,3.0,3348,429197,Vice,2018,7.016,6.7731,movie,1.0,title
-The Mule,2018,3.5,4094,504172,The Mule,2018,6.866,3.7068,movie,1.0,title
-Uncut Gems,2019,4.0,2707,473033,Uncut Gems,2019,7.154,3.4029,movie,1.0,title
-Marriage Story,2019,4.0,733,492188,Marriage Story,2019,7.7,6.9588,movie,1.0,title
-The Lighthouse,2019,3.5,1349,503919,The Lighthouse,2019,7.5,3.6753,movie,1.0,title
-Bohemian Rhapsody,2018,3.0,336,424694,Bohemian Rhapsody,2018,7.965,7.8674,movie,1.0,title
-The King,2019,3.0,2699,504949,The King,2019,7.156,9.4838,movie,1.0,title
-Bullet Train,2022,5.0,1576,718930,Bullet Train,2022,7.422,11.33,movie,1.0,title
-Extraction 2,2023,3.5,1648,697843,Extraction 2,2023,7.407,6.0227,movie,1.0,title
-The Two Popes,2019,3.5,1334,551332,The Two Popes,2019,7.491,4.0885,movie,1.0,title
-Joker,2019,4.0,171,475557,Joker,2019,8.131,12.8935,movie,1.0,title
-Black Bird,2022,4.5,10643,155537,Black Bird,2022,8.075,8.4093,tv,1.0,title
-A Quiet Place,2018,3.5,1686,447332,A Quiet Place,2018,7.396,6.6052,movie,1.0,title
-Elvis,2022,2.0,1379,614934,Elvis,2022,7.478,4.2675,movie,1.0,title
-Venom,2018,2.0,4275,335983,Venom,2018,6.8,10.1475,movie,1.0,title
-Green Book,2018,4.0,104,490132,Green Book,2018,8.2,9.413,movie,1.0,title
-mid90s,2018,3.0,1359,437586,mid90s,2018,7.485,5.4682,movie,1.0,title
-A Star Is Born,2018,2.5,1311,332562,A Star Is Born,2018,7.5,9.8429,movie,1.0,title
-The Favourite,2018,3.0,1301,375262,The Favourite,2018,7.498,3.2994,movie,1.0,title
-The Ballad of Buster Scruggs,2018,2.5,2821,537996,The Ballad of Buster Scruggs,2018,7.129,5.979,movie,1.0,title
-First Man,2018,3.0,3223,369972,First Man,2018,7.042,2.9758,movie,1.0,title
-Sicario: Day of the Soldado,2018,3.0,3714,400535,Sicario: Day of the Soldado,2018,6.9,7.6345,movie,1.0,title
-Incredibles 2,2018,3.0,1452,260513,Incredibles 2,2018,7.456,9.8497,movie,1.0,title
-The Man Who Killed Don Quixote,2018,2.5,4687,297725,The Man Who Killed Don Quixote,2018,6.7,4.1251,movie,1.0,title
-BlacKkKlansman,2018,3.5,1332,487558,BlacKkKlansman,2018,7.492,2.9588,movie,1.0,title
-Cold War,2018,3.5,1531,440298,Cold War,2018,7.436,1.1906,movie,1.0,title
-The Titan,2018,0.5,9959,476926,The Titan,2018,5.321,9.2414,movie,1.0,title
-Utøya: July 22,2018,4.0,2559,500006,Utøya: July 22,2018,7.2,2.5974,movie,1.0,title
-Bright,2017,0.5,7611,400106,Bright,2017,6.2,2.176,movie,1.0,title
-Phantom Thread,2017,3.5,2028,400617,Phantom Thread,2017,7.3,2.8812,movie,1.0,title
-Wheelman,2017,0.5,7827,471014,Wheelman,2017,6.118,2.9738,movie,1.0,title
-Blade Runner 2049,2017,4.0,1057,335984,Blade Runner 2049,2017,7.586,12.8793,movie,1.0,title
-Lady Bird,2017,4.0,2267,391713,Lady Bird,2017,7.254,3.8498,movie,1.0,title
-Dunkirk,2017,3.5,1476,374720,Dunkirk,2017,7.5,6.4091,movie,1.0,title
-Loving Vincent,2017,3.0,305,339877,Loving Vincent,2017,7.99,9.6112,movie,1.0,title
-Pirates of the Caribbean: Dead Men Tell No Tales,2017,2.5,5173,166426,Pirates of the Caribbean: Dead Men Tell No Tales,2017,6.654,8.5998,movie,1.0,title
-The Killing of a Sacred Deer,2017,4.5,3390,399057,The Killing of a Sacred Deer,2017,7.008,3.3936,movie,1.0,title
-Going in Style,2017,3.0,4963,353070,Going in Style,2017,6.693,2.624,movie,1.0,title
-Baby Driver,2017,3.5,1501,339403,Baby Driver,2017,7.445,7.5371,movie,1.0,title
-The Lego Batman Movie,2017,3.0,2362,324849,The Lego Batman Movie,2017,7.2,5.396,movie,1.0,title
-John Wick: Chapter 2,2017,3.5,1898,324552,John Wick: Chapter 2,2017,7.34,10.5327,movie,1.0,title
-Get Out,2017,4.5,969,419430,Get Out,2017,7.621,9.4781,movie,1.0,title
-Icarus,2017,2.5,897,432976,Icarus,2017,7.654,3.518,movie,1.0,title
-Fantastic Beasts and Where to Find Them,2016,2.5,2023,259316,Fantastic Beasts and Where to Find Them,2016,7.3,7.891,movie,1.0,title
-Doctor Strange,2016,2.5,1591,284052,Doctor Strange,2016,7.418,6.4818,movie,1.0,title
-Split,2016,3.0,1883,381288,Split,2017,7.343,7.7861,movie,1.0,title
-The Invisible Guest,2016,4.0,216,411088,The Invisible Guest,2017,8.083,5.0892,movie,1.0,title
-Jackie,2016,3.0,6207,376866,Jackie,2016,6.455,1.5286,movie,1.0,title
-Moonlight,2016,3.0,1793,376867,Moonlight,2016,7.365,2.6876,movie,1.0,title
-Nocturnal Animals,2016,4.0,1590,340666,Nocturnal Animals,2016,7.418,3.2942,movie,1.0,title
-Arrival,2016,3.5,964,329865,Arrival,2016,7.6,8.226,movie,1.0,title
-Suicide Squad,2016,1.5,8640,297761,Suicide Squad,2016,5.92,6.073,movie,1.0,title
-Your Name.,2016,4.0,14,372058,Your Name.,2016,8.479,29.0331,movie,1.0,title
-Warcraft,2016,1.5,6545,68735,Warcraft,2016,6.391,4.7554,movie,1.0,title
-Don't Breathe,2016,3.0,3350,300669,Don't Breathe,2016,7.016,5.0428,movie,1.0,title
-Perfect Strangers,2016,3.5,502,381341,Perfect Strangers,2016,7.855,1.6207,movie,1.0,title
-Manchester by the Sea,2016,5.0,1147,334541,Manchester by the Sea,2016,7.5,4.1964,movie,1.0,title
-The Revenant,2015,3.5,1181,281957,The Revenant,2015,7.538,7.3649,movie,1.0,title
-Star Wars: The Force Awakens,2015,3.0,2264,140607,Star Wars: The Force Awakens,2015,7.3,8.2672,movie,1.0,title
-Creed,2015,2.5,1644,312221,Creed,2015,7.408,11.3278,movie,1.0,title
-BPM (Beats per Minute),2017,3.0,774,451945,BPM (Beats per Minute),2017,7.709,4.5831,movie,1.0,title
-Star Wars: The Last Jedi,2017,3.0,4596,181808,Star Wars: The Last Jedi,2017,6.8,6.9173,movie,1.0,title
-Intrusion,2021,1.0,8571,785752,Intrusion,2021,5.938,5.7419,movie,1.0,title
-The Power of the Dog,2021,3.0,4661,600583,The Power of the Dog,2021,6.752,4.8218,movie,1.0,title
-Don't Look Up,2021,3.0,3088,646380,Don't Look Up,2021,7.068,6.9515,movie,1.0,title
-Prisoners,2013,4.5,195,146233,Prisoners,2013,8.1,7.235,movie,1.0,title
-Cube,1997,2.5,4386,431,Cube,1998,6.807,7.2865,movie,1.0,title
-The Others,2001,3.0,987,1933,The Others,2001,7.6,4.468,movie,1.0,title
-Deadpool,2016,4.0,965,293660,Deadpool,2016,7.623,11.5515,movie,1.0,title
-X-Men: First Class,2011,4.0,2081,49538,X-Men: First Class,2011,7.298,0.4195,movie,1.0,title
-X-Men: Days of Future Past,2014,3.5,1217,127585,X-Men: Days of Future Past,2014,7.528,9.8781,movie,1.0,title
-X-Men Origins: Wolverine,2009,2.0,7091,2080,X-Men Origins: Wolverine,2009,6.28,0.5954,movie,1.0,title
-X-Men,2000,3.0,3391,36657,X-Men,2000,7.008,0.392,movie,1.0,title
-X2,2003,3.0,3272,36658,X2,2003,7.032,0.2985,movie,1.0,title
-X-Men: The Last Stand,2006,2.5,6437,36668,X-Men: The Last Stand,2006,6.413,0.4178,movie,1.0,title
-The Wolverine,2013,3.0,6344,76170,The Wolverine,2013,6.429,1.0861,movie,1.0,title
-X-Men: Apocalypse,2016,2.5,5886,246655,X-Men: Apocalypse,2016,6.518,6.5969,movie,1.0,title
-Dark Phoenix,2019,1.5,8469,320288,Dark Phoenix,2019,5.963,5.0511,movie,1.0,title
-Deadpool 2,2018,4.0,1342,383498,Deadpool 2,2018,7.489,8.0414,movie,1.0,title
-The Last Duel,2021,2.5,1622,617653,The Last Duel,2021,7.4,9.2989,movie,1.0,title
-Corpus Christi,2019,4.0,949,471707,Corpus Christi,2019,7.6,2.9974,movie,1.0,title
-Ford v Ferrari,2019,2.5,283,359724,Ford v Ferrari,2019,8.007,7.0744,movie,1.0,title
-Logan,2017,2.0,570,263115,Logan,2017,7.8,7.9007,movie,1.0,title
-The Grand Budapest Hotel,2014,4.5,258,120467,The Grand Budapest Hotel,2014,8.033,7.0514,movie,1.0,title
-Black Swan,2010,4.0,821,44214,Black Swan,2010,7.686,8.9975,movie,1.0,title
-Paperman,2012,3.5,298,140420,Paperman,2012,8.0,4.842,movie,1.0,title
-"Three Billboards Outside Ebbing, Missouri",2017,4.0,230,359940,"Three Billboards Outside Ebbing, Missouri",2017,8.1,6.6237,movie,1.0,title
-Murder on the Orient Express,2017,2.5,4886,392044,Murder on the Orient Express,2017,6.7,4.5229,movie,1.0,title
-Death to 2021,2021,2.0,5982,773655,Death to 2020,2020,6.498,1.3978,movie,0.9230769230769231,title
-Death to 2020,2020,2.5,5982,773655,Death to 2020,2020,6.498,1.3978,movie,1.0,title
-Star Wars: The Rise of Skywalker,2019,2.5,7096,181812,Star Wars: The Rise of Skywalker,2019,6.278,8.8776,movie,1.0,title
-Bao,2018,3.5,1123,514754,Bao,2018,7.559,3.0162,movie,1.0,title
-Spider-Man: Homecoming,2017,2.5,1939,315635,Spider-Man: Homecoming,2017,7.329,13.6937,movie,1.0,title
-Cars 3,2017,2.5,4141,260514,Cars 3,2017,6.9,11.7201,movie,1.0,title
-The Shack,2017,1.5,1302,345938,The Shack,2017,7.5,3.7369,movie,1.0,title
-Spectre,2015,3.0,5628,206647,Spectre,2015,6.566,7.0963,movie,1.0,title
-The Martian,2015,3.0,809,286217,The Martian,2015,7.691,9.5546,movie,1.0,title
-Steve Jobs,2015,2.0,4536,321697,Steve Jobs,2015,6.777,1.6983,movie,1.0,title
-Everest,2015,3.0,4277,253412,Everest,2015,6.827,3.7103,movie,1.0,title
-Mission: Impossible – Rogue Nation,2015,3.0,2419,177677,Mission: Impossible - Rogue Nation,2015,7.219,6.0512,movie,1.0,title
-Ant-Man,2015,2.0,3094,102899,Ant-Man,2015,7.067,6.8454,movie,1.0,title
-Macbeth,2015,0.5,6213,225728,Macbeth,2015,6.454,5.0919,movie,1.0,title
-The Lobster,2015,4.0,3262,254320,The Lobster,2015,7.034,4.6696,movie,1.0,title
-Mad Max: Fury Road,2015,3.0,951,76341,Mad Max: Fury Road,2015,7.628,10.661,movie,1.0,title
-Southpaw,2015,2.5,1800,307081,Southpaw,2015,7.363,11.8832,movie,1.0,title
-Furious 7,2015,2.5,2404,168259,Furious 7,2015,7.223,8.1661,movie,1.0,title
-The Witch,2015,3.5,3467,310131,The Witch,2016,6.995,6.9613,movie,1.0,title
-Ex Machina,2015,3.0,1093,264660,Ex Machina,2015,7.571,5.7682,movie,1.0,title
-Exodus: Gods and Kings,2014,2.0,8776,147441,Exodus: Gods and Kings,2014,5.88,6.1918,movie,1.0,title
-Unbroken,2014,2.5,1567,227306,Unbroken,2014,7.426,6.9305,movie,1.0,title
-American Sniper,2014,3.0,1595,190859,American Sniper,2014,7.417,5.2087,movie,1.0,title
-Fury,2014,3.5,1173,228150,Fury,2014,7.54,12.3048,movie,1.0,title
-Gone Girl,2014,2.0,446,210577,Gone Girl,2014,7.889,13.1401,movie,1.0,title
-John Wick,2014,3.5,1463,245891,John Wick,2014,7.453,6.4159,movie,1.0,title
-The Maze Runner,2014,2.5,2546,198663,The Maze Runner,2014,7.192,18.2361,movie,1.0,title
-The Theory of Everything,2014,2.5,538,266856,The Theory of Everything,2014,7.837,5.1986,movie,1.0,title
-The Imitation Game,2014,3.0,306,205596,The Imitation Game,2014,7.99,12.2908,movie,1.0,title
-Birdman or (The Unexpected Virtue of Ignorance),2014,3.0,1467,194662,Birdman or (The Unexpected Virtue of Ignorance),2014,7.451,4.4108,movie,1.0,title
-Transformers: Age of Extinction,2014,1.5,8503,91314,Transformers: Age of Extinction,2014,5.954,10.8477,movie,1.0,title
-Maleficent,2014,2.5,3001,102651,Maleficent,2014,7.089,9.9858,movie,1.0,title
-Edge of Tomorrow,2014,2.5,938,137113,Edge of Tomorrow,2014,7.6,8.1202,movie,1.0,title
-God's Not Dead,2014,1.0,8306,249660,God's Not Dead,2014,6.0,3.3694,movie,1.0,title
-Captain America: The Winter Soldier,2014,2.5,892,100402,Captain America: The Winter Soldier,2014,7.7,4.8012,movie,1.0,title
-Whiplash,2014,4.0,44,244786,Whiplash,2014,8.375,13.0173,movie,1.0,title
-The Wolf of Wall Street,2013,3.5,263,106646,The Wolf of Wall Street,2013,8.0,20.5095,movie,1.0,title
-The Hobbit: The Desolation of Smaug,2013,1.0,1087,57158,The Hobbit: The Desolation of Smaug,2013,7.6,11.3521,movie,1.0,title
-Lone Survivor,2013,2.5,1548,193756,Lone Survivor,2013,7.432,4.1015,movie,1.0,title
-Her,2013,3.5,517,152601,Her,2013,7.846,14.3877,movie,1.0,title
-Captain Phillips,2013,2.5,1177,109424,Captain Phillips,2013,7.539,2.8377,movie,1.0,title
-Filth,2013,2.5,4203,85889,Filth,2013,6.841,3.7869,movie,1.0,title
-Rush,2013,3.0,739,96721,Rush,2013,7.729,8.0129,movie,1.0,title
-Locke,2013,3.5,3931,210479,Locke,2014,6.896,6.202,movie,1.0,title
-Gravity,2013,3.5,2665,49047,Gravity,2013,7.2,4.8656,movie,1.0,title
-The Butler,2013,2.5,1929,132363,The Butler,2013,7.332,8.622,movie,1.0,title
-Percy Jackson: Sea of Monsters,2013,2.0,8228,76285,Percy Jackson: Sea of Monsters,2013,6.025,4.1171,movie,1.0,title
-Blue Jasmine,2013,2.5,3526,160588,Blue Jasmine,2013,6.98,1.6568,movie,1.0,title
-About Time,2013,4.0,405,122906,About Time,2013,7.909,7.469,movie,1.0,title
-The Great Beauty,2013,3.0,1278,179144,The Great Beauty,2013,7.5,1.7381,movie,1.0,title
-Now You See Me,2013,2.5,1925,75656,Now You See Me,2013,7.333,20.3609,movie,1.0,title
-Fast & Furious 6,2013,2.5,4327,82992,Fast & Furious 6,2013,6.818,0.8866,movie,1.0,title
-The Great Gatsby,2013,3.0,1811,64682,The Great Gatsby,2013,7.359,6.7841,movie,1.0,title
-Iron Man 3,2013,2.5,3765,68721,Iron Man 3,2013,6.9,12.4689,movie,1.0,title
-The Blue Umbrella,2013,3.5,1211,200481,The Blue Umbrella,2013,7.53,2.8009,movie,1.0,title
-The Best Offer,2013,3.0,601,152742,The Best Offer,2013,7.803,1.8358,movie,1.0,title
-The Hobbit: An Unexpected Journey,2012,1.5,1795,49051,The Hobbit: An Unexpected Journey,2012,7.4,15.3071,movie,1.0,title
-Skyfall,2012,3.5,2255,37724,Skyfall,2012,7.257,6.9925,movie,1.0,title
-Flight,2012,3.0,4149,87502,Flight,2012,6.9,3.7473,movie,1.0,title
-Frances Ha,2012,3.0,1894,121986,Frances Ha,2013,7.3,1.4354,movie,1.0,title
-The Hunt,2012,4.0,200,103663,The Hunt,2012,8.094,7.2308,movie,1.0,title
-The Dictator,2012,2.0,7399,76493,The Dictator,2012,6.214,8.494,movie,1.0,title
-Men in Black 3,2012,2.5,5785,41154,Men in Black 3,2012,6.537,7.3459,movie,1.0,title
-The Avengers,2012,2.5,489,24428,The Avengers,2012,7.865,45.9289,movie,1.0,title
-The Girl with the Dragon Tattoo,2011,3.0,1751,65754,The Girl with the Dragon Tattoo,2011,7.377,4.4368,movie,1.0,title
-Mission: Impossible – Ghost Protocol,2011,3.0,2922,56292,Mission: Impossible - Ghost Protocol,2011,7.108,6.4867,movie,1.0,title
-Sherlock Holmes: A Game of Shadows,2011,2.0,2770,58574,Sherlock Holmes: A Game of Shadows,2011,7.141,3.564,movie,1.0,title
-The Intouchables,2011,4.0,77,77338,The Intouchables,2011,8.271,9.0426,movie,1.0,title
-Tinker Tailor Soldier Spy,2011,3.5,5346,49517,Tinker Tailor Soldier Spy,2011,6.623,3.6128,movie,1.0,title
-Shame,2011,3.5,3755,76025,Shame,2011,6.933,3.0215,movie,1.0,title
-Captain America: The First Avenger,2011,2.0,3413,1771,Captain America: The First Avenger,2011,7.0,5.2301,movie,1.0,title
-Harry Potter and the Deathly Hallows: Part 2,2011,3.5,214,12445,Harry Potter and the Deathly Hallows: Part 2,2011,8.1,16.7884,movie,1.0,title
-Transformers: Dark of the Moon,2011,2.5,7364,38356,Transformers: Dark of the Moon,2011,6.2,2.5067,movie,1.0,title
-Drive,2011,3.5,1064,64690,Drive,2011,7.583,13.3,movie,1.0,title
-Midnight in Paris,2011,3.0,1240,59436,Midnight in Paris,2011,7.52,5.5709,movie,1.0,title
-Pirates of the Caribbean: On Stranger Tides,2011,2.5,5643,1865,Pirates of the Caribbean: On Stranger Tides,2011,6.564,13.194,movie,1.0,title
-Fast Five,2011,2.5,2321,51497,Fast Five,2011,7.242,1.1387,movie,1.0,title
-The Lincoln Lawyer,2011,4.0,2502,50348,The Lincoln Lawyer,2011,7.201,5.0304,movie,1.0,title
-True Grit,2010,3.0,2044,44264,True Grit,2010,7.307,9.2986,movie,1.0,title
-The Fighter,2010,3.5,1737,45317,The Fighter,2010,7.381,2.2819,movie,1.0,title
-The Chronicles of Narnia: The Voyage of the Dawn Treader,2010,2.0,6283,10140,The Chronicles of Narnia: The Voyage of the Dawn Treader,2010,6.4,5.5053,movie,1.0,title
-Faster,2010,2.0,6735,41283,Faster,2010,6.4,3.5932,movie,1.0,title
-Harry Potter and the Deathly Hallows: Part 1,2010,3.0,721,12444,Harry Potter and the Deathly Hallows: Part 1,2010,7.7,16.8897,movie,1.0,title
-Senna,2010,4.0,182,58496,Senna,2010,8.1,6.9211,movie,1.0,title
-The Social Network,2010,3.0,1772,37799,The Social Network,2010,7.371,8.3231,movie,1.0,title
-Toy Story 3,2010,3.0,602,10193,Toy Story 3,2010,7.803,13.8815,movie,1.0,title
-Iron Man 2,2010,2.5,4170,10138,Iron Man 2,2010,6.848,15.8075,movie,1.0,title
-Shutter Island,2010,4.5,127,11324,Shutter Island,2010,8.202,13.3522,movie,1.0,title
-Blue Valentine,2010,3.0,3633,46705,Blue Valentine,2010,7.0,8.1139,movie,1.0,title
-Sherlock Holmes,2009,2.0,2434,10528,Sherlock Holmes,2009,7.216,4.5643,movie,1.0,title
-Avatar,2009,2.5,1036,19995,Avatar,2009,7.594,26.7105,movie,1.0,title
-Brothers,2009,3.0,1997,7445,Brothers,2009,7.317,9.3105,movie,1.0,title
-2012,2009,1.5,8833,14161,2012,2009,5.864,9.4215,movie,1.0,title
-Harry Potter and the Half-Blood Prince,2009,3.0,828,767,Harry Potter and the Half-Blood Prince,2009,7.7,16.867,movie,1.0,title
-Public Enemies,2009,2.5,5015,11322,Public Enemies,2009,6.685,4.294,movie,1.0,title
-Transformers: Revenge of the Fallen,2009,2.0,7423,8373,Transformers: Revenge of the Fallen,2009,6.2,3.1354,movie,1.0,title
-Inglourious Basterds,2009,4.0,115,16869,Inglourious Basterds,2009,8.2,13.8272,movie,1.0,title
-Moon,2009,3.0,1111,17431,Moon,2009,7.6,3.0298,movie,1.0,title
-Quantum of Solace,2008,2.0,6809,10764,Quantum of Solace,2008,6.336,6.1907,movie,1.0,title
-Body of Lies,2008,2.5,5312,12113,Body of Lies,2008,6.631,2.124,movie,1.0,title
-The Dark Knight,2008,4.0,8,155,The Dark Knight,2008,8.525,25.3668,movie,1.0,title
-Presto,2008,3.0,632,13042,Presto,2008,7.785,5.2533,movie,1.0,title
-WALL·E,2008,5.0,191,10681,WALL·E,2008,8.104,11.6442,movie,1.0,title
-The Chronicles of Narnia: Prince Caspian,2008,2.0,5333,2454,The Chronicles of Narnia: Prince Caspian,2008,6.627,8.1119,movie,1.0,title
-The Boy in the Striped Pyjamas,2008,3.0,567,14574,The Boy in the Striped Pyjamas,2008,7.8,6.5016,movie,1.0,title
-Iron Man,2008,2.5,898,1726,Iron Man,2008,7.654,12.8626,movie,1.0,title
-Taken,2008,3.0,1677,8681,Taken,2008,7.399,16.5121,movie,1.0,title
-The Bucket List,2007,3.0,2573,7350,The Bucket List,2007,7.186,4.8978,movie,1.0,title
-I Am Legend,2007,3.0,2460,6479,I Am Legend,2007,7.211,9.6454,movie,1.0,title
-Hitman,2007,2.0,7695,1620,Hitman,2007,6.146,9.6181,movie,1.0,title
-American Gangster,2007,3.0,1047,4982,American Gangster,2007,7.591,5.7777,movie,1.0,title
-There Will Be Blood,2007,4.0,221,7345,There Will Be Blood,2007,8.1,8.2915,movie,1.0,title
-The Assassination of Jesse James by the Coward Robert Ford,2007,3.5,3174,4512,The Assassination of Jesse James by the Coward Robert Ford,2007,7.052,3.4165,movie,1.0,title
-Into the Wild,2007,3.0,609,5915,Into the Wild,2007,7.8,4.5579,movie,1.0,title
-Harry Potter and the Order of the Phoenix,2007,3.0,853,675,Harry Potter and the Order of the Phoenix,2007,7.7,19.5319,movie,1.0,title
-Transformers,2007,2.0,4315,1858,Transformers,2007,6.82,2.8732,movie,1.0,title
-Ocean's Thirteen,2007,3.0,4783,298,Ocean's Thirteen,2007,6.725,5.2541,movie,1.0,title
-Pirates of the Caribbean: At World's End,2007,2.5,2224,285,Pirates of the Caribbean: At World's End,2007,7.266,15.0767,movie,1.0,title
-Shrek the Third,2007,2.5,6982,810,Shrek the Third,2007,6.3,10.8549,movie,1.0,title
-Spider-Man 3,2007,3.0,6259,559,Spider-Man 3,2007,6.4,11.6695,movie,1.0,title
-Fracture,2007,3.0,2240,6145,Fracture,2007,7.262,8.9072,movie,1.0,title
-Shooter,2007,2.5,2854,7485,Shooter,2007,7.123,9.6159,movie,1.0,title
-Zodiac,2007,4.0,1224,1949,Zodiac,2007,7.526,6.4666,movie,1.0,title
-Bridge to Terabithia,2007,2.5,2040,1265,Bridge to Terabithia,2007,7.3,7.7293,movie,1.0,title
-Arthur and the Invisibles,2006,2.5,6583,9992,Arthur and the Invisibles,2006,6.385,6.7757,movie,1.0,title
-300,2006,2.5,2549,1271,300,2007,7.192,7.4233,movie,1.0,title
-Blood Diamond,2006,2.5,1138,1372,Blood Diamond,2006,7.553,5.2787,movie,1.0,title
-Casino Royale,2006,3.5,1103,36557,Casino Royale,2006,7.567,11.1881,movie,1.0,title
-Happy Feet,2006,3.0,7387,9836,Happy Feet,2006,6.216,4.7435,movie,1.0,title
-The Prestige,2006,3.0,122,1124,The Prestige,2006,8.205,9.6587,movie,1.0,title
-Pirates of the Caribbean: Dead Man's Chest,2006,3.0,1766,58,Pirates of the Caribbean: Dead Man's Chest,2006,7.373,14.8246,movie,1.0,title
-The Fast and the Furious: Tokyo Drift,2006,3.0,5812,9615,The Fast and the Furious: Tokyo Drift,2006,6.533,2.3259,movie,1.0,title
-Mission: Impossible III,2006,2.5,4651,956,Mission: Impossible III,2006,6.754,7.1227,movie,1.0,title
-Ice Age: The Meltdown,2006,2.5,4830,950,Ice Age: The Meltdown,2006,6.7,8.7966,movie,1.0,title
-Inside Man,2006,3.0,1682,388,Inside Man,2006,7.4,8.6468,movie,1.0,title
-Cars,2006,4.0,3354,920,Cars,2006,7.016,9.9029,movie,1.0,title
-V for Vendetta,2005,3.0,426,752,V for Vendetta,2006,7.899,7.8964,movie,1.0,title
-"The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",2005,2.0,2797,411,"The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",2005,7.135,17.804,movie,1.0,title
-Harry Potter and the Goblet of Fire,2005,3.5,610,674,Harry Potter and the Goblet of Fire,2005,7.8,21.5802,movie,1.0,title
-Capote,2005,2.0,3540,398,Capote,2005,6.976,5.2859,movie,1.0,title
-The Constant Gardener,2005,3.0,3447,1985,The Constant Gardener,2005,6.998,4.6769,movie,1.0,title
-Charlie and the Chocolate Factory,2005,3.0,3236,118,Charlie and the Chocolate Factory,2005,7.04,11.2147,movie,1.0,title
-Herbie Fully Loaded,2005,1.0,8995,11451,Herbie Fully Loaded,2005,5.816,5.7805,movie,1.0,title
-Mr. & Mrs. Smith,2005,2.5,4992,787,Mr. & Mrs. Smith,2005,6.688,8.3644,movie,1.0,title
-Star Wars: Episode III – Revenge of the Sith,2005,3.5,1454,1895,Star Wars: Episode III - Revenge of the Sith,2005,7.456,8.3914,movie,1.0,title
-Jack-Jack Attack,2005,2.5,2097,13932,Jack-Jack Attack,2005,7.295,1.0546,movie,1.0,title
-Constantine,2005,2.5,2886,561,Constantine,2005,7.1,7.8997,movie,1.0,title
-Ocean's Twelve,2004,3.0,5645,163,Ocean's Twelve,2004,6.563,5.0894,movie,1.0,title
-The Incredibles,2004,5.0,759,9806,The Incredibles,2004,7.719,13.8077,movie,1.0,title
-Collateral,2004,3.5,2361,1538,Collateral,2004,7.235,5.5077,movie,1.0,title
-Spider-Man 2,2004,3.5,2093,558,Spider-Man 2,2004,7.3,5.6741,movie,1.0,title
-The Terminal,2004,2.5,1848,594,The Terminal,2004,7.4,5.9674,movie,1.0,title
-Harry Potter and the Prisoner of Azkaban,2004,3.5,277,673,Harry Potter and the Prisoner of Azkaban,2004,8.011,19.5288,movie,1.0,title
-Shrek 2,2004,3.5,2055,809,Shrek 2,2004,7.305,10.9349,movie,1.0,title
-Troy,2004,2.5,2670,652,Troy,2004,7.164,16.7386,movie,1.0,title
-Kill Bill: Vol. 2,2004,3.5,473,393,Kill Bill: Vol. 2,2004,7.875,7.1049,movie,1.0,title
-The Passion of the Christ,2004,3.0,1250,615,The Passion of the Christ,2004,7.517,7.5555,movie,1.0,title
-The Lord of the Rings: The Return of the King,2003,4.0,12,122,The Lord of the Rings: The Return of the King,2003,8.491,21.766,movie,1.0,title
-Kill Bill: Vol. 1,2003,4.0,333,24,Kill Bill: Vol. 1,2003,7.969,10.4756,movie,1.0,title
-Lost in Translation,2003,3.5,1718,153,Lost in Translation,2003,7.388,5.53,movie,1.0,title
-2 Fast 2 Furious,2003,3.0,5920,584,2 Fast 2 Furious,2003,6.511,1.2427,movie,1.0,title
-Finding Nemo,2003,3.5,574,12,Finding Nemo,2003,7.817,14.11,movie,1.0,title
-Bruce Almighty,2003,2.5,4801,310,Bruce Almighty,2003,6.7,6.2089,movie,1.0,title
-Mystic River,2003,3.5,716,322,Mystic River,2003,7.741,9.0256,movie,1.0,title
-The Lord of the Rings: The Two Towers,2002,4.0,33,121,The Lord of the Rings: The Two Towers,2002,8.411,15.9408,movie,1.0,title
-Harry Potter and the Chamber of Secrets,2002,3.5,783,672,Harry Potter and the Chamber of Secrets,2002,7.705,19.9336,movie,1.0,title
-Red Dragon,2002,2.5,3274,9533,Red Dragon,2002,7.032,0.9442,movie,1.0,title
-8 Mile,2002,3.0,2759,65,8 Mile,2002,7.143,6.5588,movie,1.0,title
-Men in Black II,2002,2.5,6607,608,Men in Black II,2002,6.381,7.2283,movie,1.0,title
-The Pianist,2002,3.5,42,423,The Pianist,2002,8.38,7.5924,movie,1.0,title
-Spirit: Stallion of the Cimarron,2002,5.0,822,9023,Spirit: Stallion of the Cimarron,2002,7.686,8.3922,movie,1.0,title
-Star Wars: Episode II – Attack of the Clones,2002,2.5,5539,1894,Star Wars: Episode II - Attack of the Clones,2002,6.586,5.9335,movie,1.0,title
-Madagascar,2005,2.5,3835,953,Madagascar,2005,6.9,15.0659,movie,1.0,title
-Spider-Man,2002,3.5,1998,557,Spider-Man,2002,7.3,12.4612,movie,1.0,title
-Ice Age,2002,3.5,1786,425,Ice Age,2002,7.367,17.8653,movie,1.0,title
-A Beautiful Mind,2001,3.0,504,453,A Beautiful Mind,2001,7.855,7.5026,movie,1.0,title
-The Lord of the Rings: The Fellowship of the Ring,2001,4.0,28,120,The Lord of the Rings: The Fellowship of the Ring,2001,8.426,22.2574,movie,1.0,title
-Ocean's Eleven,2001,3.5,1466,161,Ocean's Eleven,2001,7.452,7.7241,movie,1.0,title
-Harry Potter and the Philosopher's Stone,2001,3.5,424,671,Harry Potter and the Philosopher's Stone,2001,7.9,25.4821,movie,1.0,title
-"Monsters, Inc.",2001,3.5,513,585,"Monsters, Inc.",2001,7.847,15.9064,movie,1.0,title
-Band of Brothers,2001,4.0,10309,4613,Band of Brothers,2001,8.58,15.2257,tv,1.0,title
-The Fast and the Furious,2001,2.5,3456,9799,The Fast and the Furious,2001,6.997,0.9869,movie,1.0,title
-Shrek,2001,5.0,690,808,Shrek,2001,7.754,19.8512,movie,1.0,title
-Hannibal,2001,3.0,4588,9740,Hannibal,2001,6.767,2.4827,movie,1.0,title
-Enemy at the Gates,2001,3.0,1587,853,Enemy at the Gates,2001,7.42,5.0282,movie,1.0,title
-Snatch,2000,3.0,576,107,Snatch,2000,7.816,9.2947,movie,1.0,title
-Mission: Impossible II,2000,3.0,7759,955,Mission: Impossible II,2000,6.134,5.8525,movie,1.0,title
-Requiem for a Dream,2000,4.0,276,641,Requiem for a Dream,2000,8.012,3.1563,movie,1.0,title
-American Psycho,2000,4.0,1647,1359,American Psycho,2000,7.408,7.0508,movie,1.0,title
-The Talented Mr. Ripley,1999,3.5,2518,1213,The Talented Mr. Ripley,1999,7.2,2.6936,movie,1.0,title
-"Girl, Interrupted",1999,3.5,1098,3558,"Girl, Interrupted",1999,7.569,5.5672,movie,1.0,title
-The Green Mile,1999,4.0,10,497,The Green Mile,1999,8.503,16.5023,movie,1.0,title
-Sleepy Hollow,1999,2.0,2569,2668,Sleepy Hollow,1999,7.187,6.4396,movie,1.0,title
-Toy Story 2,1999,4.0,1012,863,Toy Story 2,1999,7.604,12.2068,movie,1.0,title
-Fight Club,1999,4.5,24,550,Fight Club,1999,8.438,17.0356,movie,1.0,title
-Eyes Wide Shut,1999,3.5,1361,345,Eyes Wide Shut,1999,7.485,9.4113,movie,1.0,title
-Star Wars: Episode I – The Phantom Menace,1999,2.5,5622,1893,Star Wars: Episode I - The Phantom Menace,1999,6.568,7.6836,movie,1.0,title
-The Matrix,1999,3.0,98,603,The Matrix,1999,8.236,20.0516,movie,1.0,title
-A Bug's Life,1998,3.5,3555,9487,A Bug's Life,1998,6.973,7.916,movie,1.0,title
-Saving Private Ryan,1998,4.0,107,857,Saving Private Ryan,1998,8.221,11.6554,movie,1.0,title
-The Truman Show,1998,4.0,157,37165,The Truman Show,1998,8.149,14.0321,movie,1.0,title
-The Big Lebowski,1998,4.0,530,115,The Big Lebowski,1998,7.841,7.805,movie,1.0,title
-Good Will Hunting,1997,4.0,153,489,Good Will Hunting,1997,8.157,12.0566,movie,1.0,title
-Geri's Game,1997,4.0,942,13929,Geri's Game,1997,7.6,1.8454,movie,1.0,title
-Bean,1997,3.0,6141,1281,Bean,1997,6.468,5.329,movie,1.0,title
-Men in Black,1997,3.0,2440,607,Men in Black,1997,7.215,9.0393,movie,1.0,title
-L.A. Confidential,1997,4.0,596,2118,L.A. Confidential,1997,7.804,6.7201,movie,1.0,title
-Donnie Brasco,1997,3.5,1191,9366,Donnie Brasco,1997,7.535,6.2005,movie,1.0,title
-A Time to Kill,1996,2.0,1722,1645,A Time to Kill,1996,7.386,8.2011,movie,1.0,title
-Mission: Impossible,1996,3.0,3363,954,Mission: Impossible,1996,7.014,6.4888,movie,1.0,title
-Fargo,1996,4.0,509,275,Fargo,1996,7.852,7.8282,movie,1.0,title
-Primal Fear,1996,3.5,893,1592,Primal Fear,1996,7.7,8.0923,movie,1.0,title
-Twelve Monkeys,1995,3.0,1018,63,Twelve Monkeys,1995,7.602,6.1564,movie,1.0,title
-Heat,1995,4.5,386,949,Heat,1995,7.923,9.9981,movie,1.0,title
-Toy Story,1995,4.5,331,862,Toy Story,1995,7.971,17.9679,movie,1.0,title
-Se7en,1995,4.5,43,807,Se7en,1995,8.377,15.4156,movie,1.0,title
-Apollo 13,1995,4.0,1471,568,Apollo 13,1995,7.451,3.2599,movie,1.0,title
-The Shawshank Redemption,1994,4.5,1,278,The Shawshank Redemption,1994,8.713,34.3,movie,1.0,title
-The Mask,1994,3.5,3551,854,The Mask,1994,6.974,11.4718,movie,1.0,title
-Forrest Gump,1994,4.0,17,13,Forrest Gump,1994,8.463,17.1503,movie,1.0,title
-Pulp Fiction,1994,4.5,13,680,Pulp Fiction,1994,8.5,18.1003,movie,1.0,title
-Scent of a Woman,1992,4.0,648,9475,Scent of a Woman,1992,7.777,8.1644,movie,1.0,title
-Reservoir Dogs,1992,4.5,181,500,Reservoir Dogs,1992,8.118,6.7637,movie,1.0,title
-Cape Fear,1991,3.5,2294,1598,Cape Fear,1991,7.25,2.4814,movie,1.0,title
-The Silence of the Lambs,1991,4.5,53,274,The Silence of the Lambs,1991,8.3,2.8922,movie,1.0,title
-The Godfather Part III,1990,3.5,1605,242,The Godfather Part III,1990,7.416,10.5429,movie,1.0,title
-Awakenings,1990,4.0,653,11005,Awakenings,1990,7.774,6.9616,movie,1.0,title
-Dead Poets Society,1989,4.0,65,207,Dead Poets Society,1989,8.3,10.1828,movie,1.0,title
-Indiana Jones and the Last Crusade,1989,3.5,511,89,Indiana Jones and the Last Crusade,1989,7.848,6.7476,movie,1.0,title
-Full Metal Jacket,1987,4.5,175,600,Full Metal Jacket,1987,8.124,6.4545,movie,1.0,title
-The Untouchables,1987,3.5,686,117,The Untouchables,1987,7.756,4.4131,movie,1.0,title
-Dirty Dancing,1987,3.0,1935,88,Dirty Dancing,1987,7.3,5.3593,movie,1.0,title
-Indiana Jones and the Temple of Doom,1984,3.0,2065,87,Indiana Jones and the Temple of Doom,1984,7.303,6.0284,movie,1.0,title
-Scarface,1983,4.0,152,111,Scarface,1983,8.158,14.5379,movie,1.0,title
-Return of the Jedi,1983,4.0,413,1892,Return of the Jedi,1983,7.9,5.9936,movie,1.0,title
-Blade Runner,1982,3.5,364,78,Blade Runner,1982,7.9,8.4898,movie,1.0,title
-Rocky III,1982,2.5,3926,1371,Rocky III,1982,6.897,6.5491,movie,1.0,title
-Raiders of the Lost Ark,1981,3.0,388,85,Raiders of the Lost Ark,1981,7.922,8.2643,movie,1.0,title
-The Empire Strikes Back,1980,4.0,38,1891,The Empire Strikes Back,1980,8.4,6.7339,movie,1.0,title
-Life of Brian,1979,4.0,678,583,Life of Brian,1979,7.759,4.0175,movie,1.0,title
-Escape from Alcatraz,1979,4.0,1272,10734,Escape from Alcatraz,1979,7.507,6.7573,movie,1.0,title
-Apocalypse Now,1979,4.5,78,28,Apocalypse Now,1979,8.271,8.1102,movie,1.0,title
-Star Wars,1977,4.0,125,11,Star Wars,1977,8.204,13.9949,movie,1.0,title
-Taxi Driver,1976,4.0,169,103,Taxi Driver,1976,8.132,14.6755,movie,1.0,title
-One Flew Over the Cuckoo's Nest,1975,4.0,32,510,One Flew Over the Cuckoo's Nest,1975,8.413,9.7814,movie,1.0,title
-Monty Python and the Holy Grail,1975,4.0,598,762,Monty Python and the Holy Grail,1975,7.804,4.8392,movie,1.0,title
-The Godfather Part II,1974,4.0,4,240,The Godfather Part II,1974,8.6,17.7748,movie,1.0,title
-Chinatown,1974,4.0,398,829,Chinatown,1974,7.916,3.5597,movie,1.0,title
-The Godfather,1972,4.5,2,238,The Godfather,1972,8.684,25.5233,movie,1.0,title
-2001: A Space Odyssey,1968,4.5,229,62,2001: A Space Odyssey,1968,8.063,8.9594,movie,1.0,title
-Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb,1964,4.0,173,935,Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb,1964,8.125,3.8132,movie,1.0,title
-12 Angry Men,1957,4.5,6,389,12 Angry Men,1957,8.548,8.9901,movie,1.0,title
-Roman Holiday,1953,4.0,456,804,Roman Holiday,1953,7.9,3.7149,movie,1.0,title
-The Fly,1986,3.0,1569,9426,The Fly,1986,7.426,5.3857,movie,1.0,title
-Kingdom of Heaven,2005,3.5,3418,1495,Kingdom of Heaven,2005,7.004,12.4213,movie,1.0,title
-Nomadland,2020,3.5,2589,581734,Nomadland,2021,7.183,2.5549,movie,1.0,title
+Central Intelligence,2016,3.0,6406,302699,Central Intelligence,2016,6.417,8.5314,movie,1.0,title
+War Dogs,2016,3.5,3779,308266,War Dogs,2016,6.928,4.9611,movie,1.0,title
+Cruella,2021,4.0,320,337404,Cruella,2021,7.983,8.9642,movie,1.0,title
+Godzilla vs. Kong,2021,3.5,1131,399566,Godzilla vs. Kong,2021,7.556,6.6895,movie,1.0,title
+Gifted,2017,4.0,288,400928,Gifted,2017,8.0,4.8941,movie,1.0,title
+John Wick: Chapter 3 – Parabellum,2019,3.5,1499,458156,John Wick: Chapter 3 - Parabellum,2019,7.445,9.5897,movie,1.0,title
+Mortal Kombat,2021,2.0,3415,460465,Mortal Kombat,2021,7.0,5.7573,movie,1.0,title
+Black Widow,2021,3.5,2567,497698,Black Widow,2021,7.187,8.3743,movie,1.0,title
+The Mitchells vs. the Machines,2021,4.0,493,501929,The Mitchells vs. the Machines,2021,7.86,4.276,movie,1.0,title
+Army of the Dead,2021,2.5,7329,503736,Army of the Dead,2021,6.231,6.2072,movie,1.0,title
+A Quiet Place Part II,2020,4.0,1483,520763,A Quiet Place Part II,2021,7.449,5.8982,movie,1.0,title
+Eternals,2021,4.0,4481,524434,Eternals,2021,6.8,7.1535,movie,1.0,title
+Knives Out,2019,4.0,521,546554,Knives Out,2019,7.8,17.9322,movie,1.0,title
 Free Guy,2021,4.0,1429,550988,Free Guy,2021,7.463,18.327,movie,1.0,title
-The Killer,2023,4.0,827,938008,The Killer,2022,7.7,3.9093,movie,1.0,title
-No Country for Old Men,2007,5.0,356,6977,No Country for Old Men,2007,7.947,8.556,movie,1.0,title
-Inception,2010,5.0,46,27205,Inception,2010,8.37,24.1752,movie,1.0,title
-Interstellar,2014,5.0,16,157336,Interstellar,2014,8.463,38.7745,movie,1.0,title
-Sicario,2015,5.0,1611,273481,Sicario,2015,7.4,7.6954,movie,1.0,title
-Bad Times at the El Royale,2018,3.5,4178,446021,Bad Times at the El Royale,2018,6.846,3.4845,movie,1.0,title
-No One Will Save You,2023,2.0,5036,820609,No One Will Save You,2023,6.681,5.2417,movie,1.0,title
-Prometheus,2012,3.0,5513,70981,Prometheus,2012,6.589,7.419,movie,1.0,title
-Jojo Rabbit,2019,4.0,297,515001,Jojo Rabbit,2019,7.995,4.2423,movie,1.0,title
-A Haunting in Venice,2023,3.0,5529,945729,A Haunting in Venice,2023,6.586,2.9806,movie,1.0,title
-Death on the Nile,2022,1.5,6378,505026,Death on the Nile,2022,6.423,6.1922,movie,1.0,title
-Road to Perdition,2002,4.0,1870,4147,Road to Perdition,2002,7.347,4.9179,movie,1.0,title
-The Last King of Scotland,2006,4.0,1601,1523,The Last King of Scotland,2006,7.4,3.4389,movie,1.0,title
-"The French Dispatch of the Liberty, Kansas Evening Sun",2021,2.0,3347,542178,"The French Dispatch of the Liberty, Kansas Evening Sun",2021,7.0,11.062,movie,1.0,title
-Braveheart,1995,4.0,366,197,Braveheart,1995,7.942,12.0309,movie,1.0,title
-"Good Morning, Vietnam",1987,3.5,2041,801,"Good Morning, Vietnam",1987,7.3,4.9098,movie,1.0,title
-The Drop,2014,5.0,4306,154400,The Drop,2014,6.821,11.755,movie,1.0,title
-Alien³,1992,2.0,6626,8077,Alien³,1992,6.378,11.7813,movie,1.0,title
-Rogue One: A Star Wars Story,2016,3.0,1282,330459,Rogue One: A Star Wars Story,2016,7.503,5.8858,movie,1.0,title
-Shoplifters,2018,3.5,516,505192,Shoplifters,2018,7.8,5.5801,movie,1.0,title
-The Big Short,2015,4.0,1810,318846,The Big Short,2015,7.358,6.4216,movie,1.0,title
-Inside Out,2015,4.0,402,150540,Inside Out,2015,7.9,12.3498,movie,1.0,title
-Ferrari,2023,3.0,6655,365620,Ferrari,2023,6.368,2.7836,movie,1.0,title
-Dream Scenario,2023,3.5,5192,823482,Dream Scenario,2023,6.7,3.097,movie,1.0,title
-Kung Fu Panda,2008,4.0,2031,9502,Kung Fu Panda,2008,7.31,13.7542,movie,1.0,title
-Kung Fu Panda 2,2011,4.5,3171,49444,Kung Fu Panda 2,2011,7.053,9.2021,movie,1.0,title
-Kung Fu Panda 3,2016,3.0,3807,140300,Kung Fu Panda 3,2016,6.9,7.0108,movie,1.0,title
-How to Train Your Dragon,2010,4.0,508,10191,How to Train Your Dragon,2010,7.854,12.8841,movie,1.0,title
-Wonka,2023,2.5,3163,787699,Wonka,2023,7.054,8.6737,movie,1.0,title
-Killers of the Flower Moon,2023,3.0,1641,466420,Killers of the Flower Moon,2023,7.409,6.6294,movie,1.0,title
-Oppenheimer,2023,2.5,246,872585,Oppenheimer,2023,8.045,16.0128,movie,1.0,title
-Léon: The Professional,1994,4.0,66,101,Léon: The Professional,1994,8.299,12.1308,movie,1.0,title
-Puss in Boots: The Last Wish,2022,5.0,119,315162,Puss in Boots: The Last Wish,2022,8.21,12.4738,movie,1.0,title
-The Devil's Advocate,1997,3.5,1417,1813,The Devil's Advocate,1997,7.467,7.6312,movie,1.0,title
-Good Time,2017,4.0,2462,429200,Good Time,2017,7.21,1.9402,movie,1.0,title
-Spencer,2021,3.0,4680,716612,Spencer,2021,6.7,1.7312,movie,1.0,title
-The Game,1997,5.0,1104,2649,The Game,1997,7.567,7.2468,movie,1.0,title
-A Clockwork Orange,1971,4.0,139,185,A Clockwork Orange,1971,8.181,6.1473,movie,1.0,title
-Catch Me If You Can,2002,3.0,323,640,Catch Me If You Can,2002,7.979,12.2027,movie,1.0,title
-Toy Story 4,2019,3.0,1409,301528,Toy Story 4,2019,7.47,8.5931,movie,1.0,title
-The Shining,1980,4.5,120,694,The Shining,1980,8.207,11.6809,movie,1.0,title
-Argo,2012,2.5,2139,68734,Argo,2012,7.283,4.5467,movie,1.0,title
-Wonder Woman,2017,2.0,2441,297762,Wonder Woman,2017,7.214,12.1657,movie,1.0,title
-Cars 2,2011,4.0,7606,49013,Cars 2,2011,6.165,13.742,movie,1.0,title
-Nightcrawler,2014,4.0,778,242582,Nightcrawler,2014,7.7,7.4614,movie,1.0,title
-Pirates of the Caribbean: The Curse of the Black Pearl,2003,3.5,577,22,Pirates of the Caribbean: The Curse of the Black Pearl,2003,7.816,17.9354,movie,1.0,title
-The Dark Knight Rises,2012,4.0,624,49026,The Dark Knight Rises,2012,7.789,11.9338,movie,1.0,title
-Batman Begins,2005,4.0,760,272,Batman Begins,2005,7.7,13.1763,movie,1.0,title
-You Were Never Really Here,2017,4.5,5731,398181,You Were Never Really Here,2017,6.545,3.276,movie,1.0,title
-Django Unchained,2012,4.5,135,68718,Django Unchained,2012,8.2,15.2834,movie,1.0,title
-Jujutsu Kaisen 0,2021,3.0,177,810693,Jujutsu Kaisen 0,2021,8.123,10.1253,movie,1.0,title
-Turning Red,2022,4.0,1947,508947,Turning Red,2022,7.328,8.9273,movie,1.0,title
-Rango,2011,2.5,3987,44896,Rango,2011,6.9,7.074,movie,1.0,title
-Edward Scissorhands,1990,4.0,761,162,Edward Scissorhands,1990,7.7,11.8873,movie,1.0,title
-The Creator,2023,2.0,3307,670292,The Creator,2023,7.025,5.9411,movie,1.0,title
-Poor Things,2023,3.0,895,792307,Poor Things,2023,7.655,9.667,movie,1.0,title
-The Holdovers,2023,4.0,906,840430,The Holdovers,2023,7.652,6.3142,movie,1.0,title
-The Nice Guys,2016,3.5,2848,290250,The Nice Guys,2016,7.123,4.4301,movie,1.0,title
-Ted,2012,3.0,6246,72105,Ted,2012,6.448,10.2845,movie,1.0,title
-Argylle,2024,2.5,8237,848538,Argylle,2024,6.023,5.051,movie,1.0,title
-Anatomy of a Fall,2023,4.5,1170,915935,Anatomy of a Fall,2023,7.5,4.1198,movie,1.0,title
-The Unbearable Weight of Massive Talent,2022,3.0,4490,648579,The Unbearable Weight of Massive Talent,2022,6.8,2.8171,movie,1.0,title
+Shang-Chi and the Legend of the Ten Rings,2021,4.0,1280,566525,Shang-Chi and the Legend of the Ten Rings,2021,7.504,9.4326,movie,1.0,title
+Love and Monsters,2020,3.0,2159,590223,Love and Monsters,2020,7.279,6.0981,movie,1.0,title
+John Wick: Chapter 4,2023,4.0,767,603692,John Wick: Chapter 4,2023,7.7,15.0447,movie,1.0,title
+Spider-Man: No Way Home,2021,4.0,371,634649,Spider-Man: No Way Home,2021,7.9,19.5983,movie,1.0,title
+Glass Onion,2022,3.5,3239,661374,Glass Onion: A Knives Out Mystery,2022,7.038,8.0615,movie,0.95,substring
+No Hard Feelings,2023,2.5,4919,884605,No Hard Feelings,2023,6.698,7.6274,movie,1.0,title
+Arrival,2016,3.5,964,329865,Arrival,2016,7.6,8.226,movie,1.0,title
+Cars 2,2011,3.5,7606,49013,Cars 2,2011,6.165,13.742,movie,1.0,title
+Fight Club,1999,4.5,24,550,Fight Club,1999,8.438,17.0356,movie,1.0,title
+Hitch,2005,4.0,5594,8488,Hitch,2005,6.573,7.5298,movie,1.0,title
+Friends with Benefits,2011,3.5,5196,50544,Friends with Benefits,2011,6.65,6.6084,movie,1.0,title
+The Hangover,2009,3.5,1950,18785,The Hangover,2009,7.328,13.2845,movie,1.0,title
+Grown Ups,2010,2.0,6493,38365,Grown Ups,2010,6.401,9.5211,movie,1.0,title
+All the Bright Places,2020,4.0,934,342470,All the Bright Places,2020,7.636,4.7472,movie,1.0,title
+The Hangover Part II,2011,3.5,5983,45243,The Hangover Part II,2011,6.498,9.4327,movie,1.0,title
+Life in a Year,2020,4.0,95,447362,Life in a Year,2020,8.24,5.9137,movie,1.0,title
+The Lucky One,2012,3.5,2649,77877,The Lucky One,2012,7.168,6.5086,movie,1.0,title
+Love & Other Drugs,2010,4.0,3251,43347,Love & Other Drugs,2010,7.037,5.9353,movie,1.0,title
+Dune,2021,4.5,647,438631,Dune,2021,7.777,18.5624,movie,1.0,title
 Dune: Part Two,2024,5.0,166,693134,Dune: Part Two,2024,8.1,16.1464,movie,1.0,title
-Hoodwinked!,2005,5.0,7209,10982,Hoodwinked!,2005,6.3,7.0224,movie,1.0,title
-RRRrrrr!!!,2004,3.0,6942,21778,RRRrrrr!!!,2004,6.308,13.4494,movie,1.0,title
-Kung Fu Panda 4,2024,3.5,3285,1011985,Kung Fu Panda 4,2024,7.029,14.3401,movie,1.0,title
-Road House,2024,3.5,3715,359410,Road House,2024,6.9,8.6656,movie,1.0,title
-The Whale,2022,3.5,620,785084,The Whale,2022,7.8,4.8483,movie,1.0,title
-Nope,2022,2.0,4267,762504,Nope,2022,6.828,9.4086,movie,1.0,title
-Belfast,2021,3.0,3170,777270,Belfast,2021,7.053,1.163,movie,1.0,title
-Hacksaw Ridge,2016,3.5,134,324786,Hacksaw Ridge,2016,8.192,11.019,movie,1.0,title
-The Thomas Crown Affair,1968,3.0,4556,912,The Thomas Crown Affair,1968,6.8,3.8555,movie,1.0,title
-Red Rocket,2021,3.0,4495,763329,Red Rocket,2021,6.784,1.1916,movie,1.0,title
-Civil War,2024,3.0,4154,929590,Civil War,2024,6.9,10.6304,movie,1.0,title
-Midnight Express,1978,3.5,1461,11327,Midnight Express,1978,7.454,5.1445,movie,1.0,title
-"The Good, the Bad and the Ugly",1966,4.5,15,429,"The Good, the Bad and the Ugly",1966,8.5,11.2189,movie,1.0,title
-Raging Bull,1980,3.0,395,1578,Raging Bull,1980,7.919,2.577,movie,1.0,title
-For a Few Dollars More,1965,4.0,274,938,For a Few Dollars More,1965,8.0,5.1622,movie,1.0,title
-The Fall Guy,2024,3.5,3511,746036,The Fall Guy,2024,7.0,8.7723,movie,1.0,title
-Challengers,2024,3.0,3746,937287,Challengers,2024,6.9,6.9439,movie,1.0,title
-The Death of Stalin,2017,3.5,3349,402897,The Death of Stalin,2017,7.016,2.0719,movie,1.0,title
-Suspiria,1977,4.0,1370,11906,Suspiria,1977,7.5,3.1259,movie,1.0,title
-Hit Man,2023,3.5,4466,974635,Hit Man,2024,6.792,5.3272,movie,1.0,title
-La La Land,2016,4.0,428,313369,La La Land,2016,7.9,10.7473,movie,1.0,title
-Blow Out,1981,3.0,1785,11644,Blow Out,1981,7.4,2.4038,movie,1.0,title
-Bones and All,2022,4.5,3306,791177,Bones and All,2022,7.025,5.5166,movie,1.0,title
-Furiosa: A Mad Max Saga,2024,4.0,1435,786892,Furiosa: A Mad Max Saga,2024,7.461,20.782,movie,1.0,title
-Gladiator,2000,5.0,108,98,Gladiator,2000,8.221,15.9007,movie,1.0,title
-Godzilla Minus One,2023,3.0,1038,940721,Godzilla Minus One,2023,7.593,9.7211,movie,1.0,title
-Deadpool & Wolverine,2024,2.5,1096,533535,Deadpool & Wolverine,2024,7.569,24.3795,movie,1.0,title
-The Bourne Identity,2002,4.0,1412,2501,The Bourne Identity,2002,7.47,6.4677,movie,1.0,title
-Drunken Master,1978,3.0,1711,11230,Drunken Master,1978,7.389,3.7056,movie,1.0,title
-Talk to Me,2022,4.0,2742,1008042,Talk to Me,2023,7.146,6.19,movie,1.0,title
-Joker: Folie à Deux,2024,3.0,9858,889737,Joker: Folie à Deux,2024,5.41,8.6497,movie,1.0,title
-Barbarian,2022,3.5,4193,913290,Barbarian,2022,6.843,4.5744,movie,1.0,title
-The Gentlemen,2019,4.5,864,522627,The Gentlemen,2020,7.668,7.6595,movie,1.0,title
-Operation Fortune: Ruse de Guerre,2023,2.5,6127,739405,Operation Fortune: Ruse de Guerre,2023,6.5,6.1331,movie,1.0,title
-Wrath of Man,2021,4.0,1041,637649,Wrath of Man,2021,7.592,9.7877,movie,1.0,title
-Candyman,2021,3.0,8296,565028,Candyman,2021,6.0,8.0406,movie,1.0,title
-The Beekeeper,2024,0.5,2183,866398,The Beekeeper,2024,7.275,11.1429,movie,1.0,title
-It,2017,3.0,2337,346364,It,2017,7.238,27.3071,movie,1.0,title
-The Black Phone,2021,3.0,1144,756999,The Black Phone,2022,7.548,15.5863,movie,1.0,title
-GoodFellas,1990,4.0,18,769,GoodFellas,1990,8.453,13.735,movie,1.0,title
-Hereditary,2018,3.5,2113,493922,Hereditary,2018,7.291,7.9755,movie,1.0,title
-The Substance,2024,3.5,2743,933260,The Substance,2024,7.1,18.8469,movie,1.0,title
+Wonka,2023,3.0,3163,787699,Wonka,2023,7.054,8.6737,movie,1.0,title
+(500) Days of Summer,2009,3.0,2083,19913,(500) Days of Summer,2009,7.298,9.1802,movie,1.0,title
+"Crazy, Stupid, Love.",2011,4.0,2214,50646,"Crazy, Stupid, Love.",2011,7.269,8.6225,movie,1.0,title
+The Notebook,2004,4.5,439,11036,The Notebook,2004,7.892,12.2427,movie,1.0,title
+La La Land,2016,4.5,428,313369,La La Land,2016,7.9,10.7473,movie,1.0,title
+Project X,2012,3.5,3982,57214,Project X,2012,6.887,4.8125,movie,1.0,title
+Elemental,2023,4.0,1035,976573,Elemental,2023,7.594,11.7345,movie,1.0,title
+Cars 3,2017,4.0,4141,260514,Cars 3,2017,6.9,11.7201,movie,1.0,title
+Godzilla × Kong: The New Empire,2024,2.5,3057,823464,Godzilla x Kong: The New Empire,2024,7.076,17.5698,movie,0.9655172413793104,title
+The Reader,2008,4.0,1415,8055,The Reader,2008,7.468,8.6155,movie,1.0,title
+Civil War,2024,3.5,4154,929590,Civil War,2024,6.9,10.6304,movie,1.0,title
+Red Rocket,2021,2.5,4495,763329,Red Rocket,2021,6.784,1.1916,movie,1.0,title
+Transformers: Revenge of the Fallen,2009,3.5,7423,8373,Transformers: Revenge of the Fallen,2009,6.2,3.1354,movie,1.0,title
+Transformers,2007,4.0,4315,1858,Transformers,2007,6.82,2.8732,movie,1.0,title
+Transformers: Dark of the Moon,2011,3.5,7364,38356,Transformers: Dark of the Moon,2011,6.2,2.5067,movie,1.0,title
+Rise of the Planet of the Apes,2011,3.5,1905,61791,Rise of the Planet of the Apes,2011,7.3,6.2305,movie,1.0,title
+Dawn of the Planet of the Apes,2014,3.5,1920,119450,Dawn of the Planet of the Apes,2014,7.334,10.4364,movie,1.0,title
+Kingdom of the Planet of the Apes,2024,4.0,3152,653346,Kingdom of the Planet of the Apes,2024,7.057,13.3399,movie,1.0,title
+War for the Planet of the Apes,2017,4.5,2457,281338,War for the Planet of the Apes,2017,7.211,6.1637,movie,1.0,title
+Now You See Me,2013,3.0,1925,75656,Now You See Me,2013,7.333,20.3609,movie,1.0,title
+A Million Ways to Die in the West,2014,3.0,8100,188161,A Million Ways to Die in the West,2014,6.054,6.7423,movie,1.0,title
+"Love, Rosie",2014,3.5,582,200727,"Love, Rosie",2014,7.813,4.8788,movie,1.0,title
+Knocked Up,2007,3.0,6966,4964,Knocked Up,2007,6.3,8.0902,movie,1.0,title
+Chip 'n Dale: Rescue Rangers,2022,2.5,3449,420821,Chip 'n Dale: Rescue Rangers,2022,6.997,3.7045,movie,1.0,title
+Gladiator,2000,4.5,108,98,Gladiator,2000,8.221,15.9007,movie,1.0,title
+Deadpool & Wolverine,2024,3.0,1096,533535,Deadpool & Wolverine,2024,7.569,24.3795,movie,1.0,title
+Fantastic Four,2005,2.5,9038,9738,Fantastic Four,2005,5.802,6.0128,movie,1.0,title
+Fantastic Four: Rise of the Silver Surfer,2007,3.0,9465,1979,Fantastic Four: Rise of the Silver Surfer,2007,5.627,4.8596,movie,1.0,title
+A Quiet Place: Day One,2024,3.5,4993,762441,A Quiet Place: Day One,2024,6.687,8.3783,movie,1.0,title
+A Quiet Place,2018,4.0,1686,447332,A Quiet Place,2018,7.396,6.6052,movie,1.0,title
+Anyone But You,2023,3.0,4237,1072790,Anyone But You,2023,6.833,7.4316,movie,1.0,title
+Beetlejuice,1988,3.5,1781,4011,Beetlejuice,1988,7.368,5.7727,movie,1.0,title
+Ghostbusters: Frozen Empire,2024,2.5,6057,967847,Ghostbusters: Frozen Empire,2024,6.482,7.2027,movie,1.0,title
+Beetlejuice Beetlejuice,2024,4.0,3615,917496,Beetlejuice Beetlejuice,2024,6.961,7.7283,movie,1.0,title
+Inside Out 2,2024,3.5,1140,1022789,Inside Out 2,2024,7.551,27.1524,movie,1.0,title
+Paper Towns,2015,3.5,7648,286565,Paper Towns,2015,6.155,5.4065,movie,1.0,title
+Failure to Launch,2006,3.0,8950,6877,Failure to Launch,2006,5.829,4.8241,movie,1.0,title
+Twisters,2024,3.5,4438,718821,Twisters,2024,6.796,6.7121,movie,1.0,title
+The Hitman's Bodyguard,2017,3.5,3950,390043,The Hitman's Bodyguard,2017,6.892,4.1926,movie,1.0,title
+Hitman's Wife's Bodyguard,2021,2.5,5118,522931,Hitman's Wife's Bodyguard,2021,6.665,6.1567,movie,1.0,title
+Gladiator II,2024,3.5,5195,558449,Gladiator II,2024,6.65,12.7577,movie,1.0,title
+Bad Boys,1995,3.5,4285,9737,Bad Boys,1995,6.826,8.9627,movie,1.0,title
+Bad Boys II,2003,3.5,5169,8961,Bad Boys II,2003,6.655,7.8552,movie,1.0,title
+I Am Legend,2007,4.0,2460,6479,I Am Legend,2007,7.211,9.6454,movie,1.0,title
 A Real Pain,2024,3.0,4604,1013850,A Real Pain,2024,6.763,5.2241,movie,1.0,title
-Conclave,2024,4.0,2508,974576,Conclave,2024,7.2,5.8776,movie,1.0,title
-American Fiction,2023,4.0,2136,1056360,American Fiction,2023,7.283,6.2294,movie,1.0,title
-Gladiator II,2024,2.5,5195,558449,Gladiator II,2024,6.65,12.7577,movie,1.0,title
-Anora,2024,4.0,3192,1064213,Anora,2024,7.0,14.8386,movie,1.0,title
-Heretic,2024,3.5,3544,1138194,Heretic,2024,6.972,13.1205,movie,1.0,title
-Secret Level - Sifu: It Takes a Life,2024,3.5,10758,261579,Secret Level,2024,7.378,7.1013,tv,0.95,substring
-Secret Level - Unreal Tournament: Xan,2024,4.0,10758,261579,Secret Level,2024,7.378,7.1013,tv,0.95,substring
-Secret Level - PAC-MAN: Circle,2024,3.5,10758,261579,Secret Level,2024,7.378,7.1013,tv,0.95,substring
-Secret Level - Crossfire: Good Conflict,2024,3.0,10758,261579,Secret Level,2024,7.378,7.1013,tv,0.95,substring
-Secret Level - Mega Man: Start,2024,2.5,10758,261579,Secret Level,2024,7.378,7.1013,tv,0.95,substring
-Secret Level - Exodus: Odyssey,2024,3.0,10758,261579,Secret Level,2024,7.378,7.1013,tv,0.95,substring
-Secret Level - Spelunky: Tally,2024,2.5,10758,261579,Secret Level,2024,7.378,7.1013,tv,0.95,substring
-Secret Level - Playtime: Fulfillment,2024,2.5,10758,261579,Secret Level,2024,7.378,7.1013,tv,0.95,substring
-The Bourne Supremacy,2004,3.5,1964,2502,The Bourne Supremacy,2004,7.324,4.8323,movie,1.0,title
-Dirty Grandpa,2016,3.0,8581,291870,Dirty Grandpa,2016,5.936,3.8582,movie,1.0,title
-The Brutalist,2024,4.5,3582,549509,The Brutalist,2024,7.0,11.0659,movie,1.0,title
-The Incredible Hulk,2008,3.0,7355,1724,The Incredible Hulk,2008,6.2,8.0937,movie,1.0,title
-Thor,2011,3.0,4572,10195,Thor,2011,6.8,11.7626,movie,1.0,title
-Thor: The Dark World,2013,2.5,5917,76338,Thor: The Dark World,2013,6.511,6.9924,movie,1.0,title
-Guardians of the Galaxy,2014,4.0,412,118340,Guardians of the Galaxy,2014,7.905,6.0928,movie,1.0,title
-Avengers: Age of Ultron,2015,2.0,2200,99861,Avengers: Age of Ultron,2015,7.271,10.913,movie,1.0,title
-Thor: Ragnarok,2017,4.0,1063,284053,Thor: Ragnarok,2017,7.583,8.4387,movie,1.0,title
-Black Panther,2018,3.5,1788,284054,Black Panther,2018,7.4,7.4587,movie,1.0,title
-Avengers: Infinity War,2018,4.5,97,299536,Avengers: Infinity War,2018,8.236,22.0512,movie,1.0,title
-Ant-Man and the Wasp,2018,2.5,3862,363088,Ant-Man and the Wasp,2018,6.9,4.7856,movie,1.0,title
-Captain Marvel,2019,3.0,4473,299537,Captain Marvel,2019,6.8,5.6372,movie,1.0,title
-Guardians of the Galaxy Vol. 2,2017,3.5,992,283995,Guardians of the Galaxy Vol. 2,2017,7.612,9.5483,movie,1.0,title
-Ready or Not,2019,3.0,3248,567609,Ready or Not,2019,7.0,5.5481,movie,1.0,title
-Avengers: Endgame,2019,3.5,96,299534,Avengers: Endgame,2019,8.238,13.9608,movie,1.0,title
-Spider-Man: Far From Home,2019,3.5,1675,429617,Spider-Man: Far From Home,2019,7.399,12.8672,movie,1.0,title
-Shōgun,2024,4.5,10342,126308,Shōgun,2024,8.451,14.2087,tv,1.0,title
-Nosferatu,2024,2.5,4976,426063,Nosferatu,2024,6.7,10.2193,movie,1.0,title
-Mickey 17,2025,3.5,4194,696506,Mickey 17,2025,6.842,13.2793,movie,1.0,title
-Black Widow,2021,3.0,2567,497698,Black Widow,2021,7.187,8.3743,movie,1.0,title
-Shang-Chi and the Legend of the Ten Rings,2021,3.0,1280,566525,Shang-Chi and the Legend of the Ten Rings,2021,7.504,9.4326,movie,1.0,title
-Captain America: Civil War,2016,2.5,1489,271110,Captain America: Civil War,2016,7.448,12.3963,movie,1.0,title
-Eternals,2021,2.0,4481,524434,Eternals,2021,6.8,7.1535,movie,1.0,title
-The Amateur,2025,2.5,3552,1087891,The Amateur,2025,6.973,12.2814,movie,1.0,title
-Sinners,2025,4.5,1265,1233413,Sinners,2025,7.508,21.9556,movie,1.0,title
-Loki,2021,4.0,10291,84958,Loki,2021,8.2,15.8212,tv,1.0,title
-WandaVision,2021,3.5,10491,85271,WandaVision,2021,8.2,10.7157,tv,1.0,title
-Spider-Man: No Way Home,2021,3.5,371,634649,Spider-Man: No Way Home,2021,7.9,19.5983,movie,1.0,title
-Doctor Strange in the Multiverse of Madness,2022,1.5,2343,453395,Doctor Strange in the Multiverse of Madness,2022,7.237,10.4362,movie,1.0,title
-Thor: Love and Thunder,2022,4.0,6541,616037,Thor: Love and Thunder,2022,6.391,10.2422,movie,1.0,title
-Black Panther: Wakanda Forever,2022,3.0,3300,505642,Black Panther: Wakanda Forever,2022,7.0,9.3199,movie,1.0,title
-Guardians of the Galaxy Vol. 3,2023,4.5,377,447365,Guardians of the Galaxy Vol. 3,2023,7.932,12.0661,movie,1.0,title
-Black Bag,2025,4.0,6786,1233575,Black Bag,2025,6.3,7.397,movie,1.0,title
+Miller's Girl,2024,1.5,6742,1026436,Miller's Girl,2024,6.349,4.1393,movie,1.0,title
+Two Night Stand,2014,3.0,6432,286554,Two Night Stand,2014,6.413,3.2017,movie,1.0,title
+21 Jump Street,2012,3.5,3999,64688,21 Jump Street,2012,6.883,7.2867,movie,1.0,title
+The Gorge,2025,2.5,861,950396,The Gorge,2025,7.671,19.8172,movie,1.0,title
+Captain America: Brave New World,2025,2.0,8282,822119,Captain America: Brave New World,2025,6.008,19.1584,movie,1.0,title
 Thunderbolts*,2025,3.5,2021,986056,Thunderbolts*,2025,7.3,20.8997,movie,1.0,title
-Ant-Man and the Wasp: Quantumania,2023,1.0,7206,640146,Ant-Man and the Wasp: Quantumania,2023,6.3,6.7147,movie,1.0,title
-The Marvels,2023,1.0,8468,609681,The Marvels,2023,6.0,9.2772,movie,1.0,title
-Rise of the Planet of the Apes,2011,4.0,1905,61791,Rise of the Planet of the Apes,2011,7.3,6.2305,movie,1.0,title
-Captain America: Brave New World,2025,3.0,8282,822119,Captain America: Brave New World,2025,6.008,19.1584,movie,1.0,title
-Mission: Impossible – Dead Reckoning,2023,3.5,1245,575264,Mission: Impossible - Dead Reckoning Part One,2023,7.518,14.3518,movie,0.88,title
-Ballerina,2025,3.0,1977,541671,Ballerina,2025,7.32,27.3515,movie,1.0,title
-Mission: Impossible – Fallout,2018,3.5,1505,353081,Mission: Impossible - Fallout,2018,7.444,8.2794,movie,1.0,title
+Guardians of the Galaxy Vol. 3,2023,4.5,377,447365,Guardians of the Galaxy Vol. 3,2023,7.932,12.0661,movie,1.0,title
+Warfare,2025,3.5,2855,1241436,Warfare,2025,7.121,12.0702,movie,1.0,title
+Alien: Romulus,2024,3.5,2611,945961,Alien: Romulus,2024,7.177,14.3238,movie,1.0,title
+Predator: Killer of Killers,2025,3.0,481,1376434,Predator: Killer of Killers,2025,7.87,21.8654,movie,1.0,title
+The Martian,2015,4.0,809,286217,The Martian,2015,7.691,9.5546,movie,1.0,title
+The Wolf of Wall Street,2013,3.5,263,106646,The Wolf of Wall Street,2013,8.0,20.5095,movie,1.0,title
+Superman,2025,3.0,1621,1061474,Superman,2025,7.413,43.6461,movie,1.0,title
+Materialists,2025,4.0,5971,1136867,Materialists,2025,6.5,15.0041,movie,1.0,title
+Interstellar,2014,5.0,16,157336,Interstellar,2014,8.463,38.7745,movie,1.0,title
 Mission: Impossible – The Final Reckoning,2025,3.5,2233,575265,Mission: Impossible - The Final Reckoning,2025,7.263,56.1677,movie,1.0,title
-Dawn of the Planet of the Apes,2014,4.0,1920,119450,Dawn of the Planet of the Apes,2014,7.334,10.4364,movie,1.0,title
-War for the Planet of the Apes,2017,3.5,2457,281338,War for the Planet of the Apes,2017,7.211,6.1637,movie,1.0,title
-Kingsman: The Secret Service,2014,4.5,968,207703,Kingsman: The Secret Service,2015,7.6,7.2525,movie,1.0,title
-Warfare,2025,4.5,2855,1241436,Warfare,2025,7.121,12.0702,movie,1.0,title
-Nineteen Eighty-Four,1984,3.0,4450,9314,Nineteen Eighty-Four,1984,6.795,2.9717,movie,1.0,title
-28 Days Later,2002,2.5,2366,170,28 Days Later,2002,7.234,8.2645,movie,1.0,title
-28 Weeks Later,2007,1.5,5431,1562,28 Weeks Later,2007,6.607,6.6547,movie,1.0,title
-F1,2025,3.5,590,911430,F1,2025,7.8,40.2951,movie,1.0,title
-Kingsman: The Golden Circle,2017,3.5,3653,343668,Kingsman: The Golden Circle,2017,7.0,5.7546,movie,1.0,title
-Immaculate,2024,1.5,7344,1041613,Immaculate,2024,6.228,4.6783,movie,1.0,title
-Kingdom of the Planet of the Apes,2024,3.0,3152,653346,Kingdom of the Planet of the Apes,2024,7.057,13.3399,movie,1.0,title
-The King's Man,2021,3.0,4764,476669,The King's Man,2021,6.7,6.7632,movie,1.0,title
-Platoon,1986,4.5,706,792,Platoon,1986,7.746,9.3373,movie,1.0,title
-The Hunger Games,2012,3.5,2414,70160,The Hunger Games,2012,7.2,6.3769,movie,1.0,title
-The Hunger Games: Catching Fire,2013,4.0,1557,101299,The Hunger Games: Catching Fire,2013,7.4,8.1083,movie,1.0,title
-The Hunger Games: Mockingjay – Part 1,2014,3.5,4339,131631,The Hunger Games: Mockingjay - Part 1,2014,6.816,15.3658,movie,1.0,title
-The Hunger Games: Mockingjay – Part 2,2015,3.0,3899,131634,The Hunger Games: Mockingjay - Part 2,2015,6.9,9.2318,movie,1.0,title
-The Hunger Games: The Ballad of Songbirds & Snakes,2023,3.0,3428,695721,The Hunger Games: The Ballad of Songbirds & Snakes,2023,7.002,8.6725,movie,1.0,title
-The King's Speech,2010,4.0,726,45269,The King's Speech,2010,7.7,5.436,movie,1.0,title
-The Accountant,2016,3.5,2818,302946,The Accountant,2016,7.1,6.4731,movie,1.0,title
-Gran Torino,2008,5.0,308,13223,Gran Torino,2008,8.0,4.7827,movie,1.0,title
+The Fantastic 4: First Steps,2025,4.0,3275,617126,The Fantastic 4: First Steps,2025,7.03,58.8014,movie,1.0,title
+Life,2017,2.5,6254,395992,Life,2017,6.447,4.2532,movie,1.0,title

@@ -1,51 +1,7 @@
 user_title,user_year,best_match,similarity,reason
-Amateurs,2020,Antlers,0.6666666666666666,Low similarity + metadata check failed
-A Life of Speed: The Juan Manuel Fangio Story,2020,Birds of Prey (and the Fantabulous Emancipation of One Harley Quinn),0.48148148148148145,Low similarity
-The Sisterhood,2019,Otherhood,0.7368421052631579,Low similarity + metadata check failed
-Fanatyk,2017,Frantz,0.6153846153846154,Low similarity + metadata check failed
-Williams,2017,Wildlife,0.625,Low similarity + metadata check failed
-Sweat,2020,Sweetheart,0.6666666666666666,Low similarity + metadata check failed
-Little Rose,2010,Little Fockers,0.72,Low similarity + metadata check failed
-Out of Tune,2019,Out of My League,0.6666666666666666,Low similarity + metadata check failed
-Back Home,2019,Black Box,0.6666666666666666,Low similarity + metadata check failed
-The Marshal,2019,Mara,0.7272727272727273,Low similarity + metadata check failed
-Apples,2020,Antlers,0.6153846153846154,Low similarity + metadata check failed
-Hurricane,2018,The Hurricane Heist,0.75,Low similarity + metadata check failed
-303 Squadron,2018,The Square,0.5555555555555556,Low similarity + metadata check failed
-Patrick Melrose,2018,Cousins,0.5714285714285714,Low similarity + metadata check failed
-Under the Tree,2017,Under the Silver Lake,0.6857142857142857,Low similarity + metadata check failed
-Diana: In Her Own Words,2017,All the Money in the World,0.5416666666666666,Low similarity + metadata check failed
-Winter Brothers,2017,The Sisters Brothers,0.8387096774193549,Low similarity + metadata check failed
-The Divine Order,2017,Divines,0.631578947368421,Low similarity + metadata check failed
-Louise by the Shore,2016,By the Sea,0.6206896551724138,Low similarity + metadata check failed
-Born to Be Blue,2015,How to Be Single,0.6451612903225806,Low similarity + metadata check failed
-Carte Blanche,2015,Cartel Land,0.75,Low similarity + metadata check failed
-Gods,2014,The Croods,0.6,Low similarity + metadata check failed
-Terror in Resonance,2014,My Summer in Provence,0.55,Low similarity + metadata check failed
-Brides,2014,Pride,0.7272727272727273,Low similarity + metadata check failed
-Sharknado,2013,Parkland,0.5882352941176471,Low similarity + metadata check failed
-After Earth,2013,After the Dark,0.72,Low similarity + metadata check failed
-Arn: The Kingdom at Road's End,2008,Pirates of the Caribbean: At World's End,0.5757575757575758,Low similarity + metadata check failed
-Katyn,2007,Satan,0.6,Low similarity + metadata check failed
-Job: The Last Grey Cell,2006,When a Stranger Calls,0.5581395348837209,Low similarity + metadata check failed
-I Am,2005,Mind Game,0.6153846153846154,Low similarity + metadata check failed
-Fallen Art,2004,A Man Apart,0.631578947368421,Low similarity + metadata check failed
-Day of the Wacko,2002,Kiss of the Dragon,0.5882352941176471,Low similarity + metadata check failed
-The Cathedral,2002,Dreamcatcher,0.5714285714285714,Low similarity + metadata check failed
-The Old Man and the Sea,1999,Anna and the King,0.6111111111111112,Low similarity + metadata check failed
-Thanks for Every New Morning,1994,"To Wong Foo, Thanks for Everything! Julie Newmar",0.5945945945945946,Low similarity + metadata check failed
-30 Door Key,1991,The Doors,0.5,Low similarity + metadata check failed
-March Caresses,1990,The War of the Roses,0.5333333333333333,Low similarity + metadata check failed
-Talking Heads,1980,Stalker,0.5,Low similarity + metadata check failed
-Hamilton,2020,The Champion,0.75,Low similarity + metadata check failed
-Afterimage,2016,Aftermath,0.7368421052631579,Low similarity + metadata check failed
-Silent Night,2017,Sleight,0.7368421052631579,Low similarity + metadata check failed
-Megalopolis,2024,Weapons,0.5555555555555556,Low similarity + metadata check failed
-Secret Level - Dungeons & Dragons: The Queen's Cradle,2024,Dungeons & Dragons: Honor Among Thieves,0.5301204819277109,Low similarity + metadata check failed
-Secret Level - New World: The Once and Future King,2024,Black Clover: Sword of the Wizard King,0.5238095238095238,Low similarity + metadata check failed
-"Secret Level - Warhammer 40,000: And They Shall Know No Fear",2024,Aquaman and the Lost Kingdom,0.40476190476190477,Low similarity
-Secret Level - Armored Core: Asset Management,2024,Secret Level,0.4444444444444444,Low similarity
-Secret Level - The Outer Worlds: The Company We Keep,2024,Leave the World Behind,0.4788732394366197,Low similarity
-Secret Level - Concord: Tale of the Implacable,2024,Rebel Moon - Part Two: The Scargiver,0.5,Low similarity + metadata check failed
-Secret Level - Honor of Kings: The Way of All Things,2024,The Lord of the Rings: The War of the Rohirrim,0.5555555555555556,Low similarity + metadata check failed
-The Falcon and the Winter Soldier,2021,The Dark and the Wicked,0.5833333333333334,Low similarity + metadata check failed
+Seal Team Six: The Raid on Osama Bin Laden,2012,Pirates of the Caribbean: On Stranger Tides,0.5060240963855421,Low similarity + metadata check failed
+Superpower,2023,Superwho?,0.6666666666666666,Low similarity + metadata check failed
+How I Became a Gangster,2019,How I Became a Superhero,0.7659574468085106,Low similarity + metadata check failed
+Mariupol: The People's Story,2022,Money Shot: The Pornhub Story,0.5555555555555556,Low similarity + metadata check failed
+Memories of CS:GO - The Early Years,2024,Masters of the Air,0.56,Low similarity + metadata check failed
+The Witcher: Sirens of the Deep,2025,Mother of the Bride,0.6222222222222222,Low similarity + metadata check failed

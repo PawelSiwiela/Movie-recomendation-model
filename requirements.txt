@@ -11,7 +11,7 @@ scikit-learn>=1.3.0
 # API & Database
 requests>=2.31.0
 python-dotenv>=1.0.0  # Dla .env
-sqlite3  # Built-in with Python
+# sqlite3 - Built-in with Python, nie instalować przez pip
 
 # Progress bars
 tqdm>=4.65.0

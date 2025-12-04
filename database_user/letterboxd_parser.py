@@ -177,7 +177,7 @@ class LetterboxdParser:
 
 if __name__ == "__main__":
     # Test parsera
-    parser = LetterboxdParser("letterboxd-paesielawa-2025-12-03-23-47-utc")
+    parser = LetterboxdParser("letterboxd-plisiu-2025-12-04-11-19-utc")
     
     # Załaduj dane
     parser.load_ratings()
