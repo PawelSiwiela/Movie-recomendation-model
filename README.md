@@ -21,7 +21,7 @@ Requires Python 3.10+ and an API key from [The Movie Database (TMDB)](https://ww
 
 ```bash
 # Clone the repository
-git clone https://github.com/YourUsername/Movie-Recommendation-Model.git
+git clone https://github.com/PawelSiwiela/Movie-Recommendation-Model.git
 cd Movie-Recommendation-Model
 
 # Install dependencies
