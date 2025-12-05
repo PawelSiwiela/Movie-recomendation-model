@@ -20,15 +20,9 @@ Requires Python 3.10+ and an API key from [The Movie Database (TMDB)](https://ww
 ### 1. Installation
 
 ```bash
-<<<<<<< HEAD
 # Clone the repository
 git clone https://github.com/YourUsername/Movie-Recommendation-Model.git
 cd Movie-Recommendation-Model
-=======
-# Sklonuj repozytorium
-git clone https://github.com/PawelSiwiela/Movie-recomendation-model.git
-cd Movie-recomendation-model
->>>>>>> b1877437431df318ce342da2e08395bb8b554829
 
 # Install dependencies
 pip install -r requirements.txt
@@ -90,13 +84,7 @@ The entire process (matching movies, fetching their data, training the model, an
     │   └── prepare_training_data.py # Prepares data for model training
     │
     └── model/
-<<<<<<< HEAD
         ├── model.py            # Neural network architecture definition
         ├── training.py         # Model training logic
         └── recommender.py      # Generates recommendations using the trained model
-=======
-        ├── model.py            # Definicja architektury sieci neuronowej
-        ├── training.py         # Logika treningu modelu
-        └── recommender.py      # Generowanie rekomendacji z użyciem modelu
->>>>>>> b1877437431df318ce342da2e08395bb8b554829
 ```
