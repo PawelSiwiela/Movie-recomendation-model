@@ -1,11 +1,11 @@
 """
-System rekomendacji wykorzystujący wytrenowany model.
+System rekomendacji wykorzystujący wytrenowany model (wersja On-Demand).
 
-Zawiera:
-- Ładowanie wytrenowanego modelu
-- Generowanie rekomendacji dla użytkownika
-- Ranking filmów według przewidywanych ocen
-- Filtrowanie (gatunki, rok, aktorzy)
+- Ładuje wytrenowany model i encodery specyficzne dla użytkownika.
+- Generuje kandydatów do rekomendacji z wielu źródeł API TMDB (popularne, oceniane, podobne).
+- Dla każdego kandydata pobiera na żywo jego pełne cechy.
+- Tworzy wektory cech i przepuszcza je przez model w celu uzyskania "Wyniku dopasowania".
+- Zwraca posortowaną listę najlepszych rekomendacji.
 """
 
 import torch
@@ -13,47 +13,34 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 import pickle
-from typing import List, Dict, Optional, Tuple
+from typing import List, Optional, Set
 import sys
+import time
 
-# Dodaj src/model do ścieżki
+# Dodaj ścieżki do importów
 sys.path.insert(0, str(Path(__file__).parent))
+sys.path.append(str(Path(__file__).parent.parent.parent / "database"))
 from model import create_model
+from tmdb_client import TMDBClient
 
 
 class MovieRecommender:
-    """
-    System rekomendacji filmów.
-    
-    UWAGA: Model przewiduje wynik dopasowania w skali 0-1.
-    """
+    """System rekomendacji filmów w trybie On-Demand."""
     
     def __init__(
         self,
         model_path: str,
-        enriched_data_path: str,
+        user_movies_path: str,
         encoders_path: str,
-        db_path: str,
+        tmdb_client: TMDBClient,
         device: str = 'cpu'
     ):
-        """
-        Inicjalizacja systemu rekomendacji.
-        
-        Args:
-            model_path: Ścieżka do wytrenowanego modelu (.pth)
-            enriched_data_path: Ścieżka do enriched_movies.csv (filmy użytkownika)
-            encoders_path: Ścieżka do encoders.pkl
-            db_path: Ścieżka do database/movies.db (pełna baza TMDB)
-            device: 'cpu' lub 'cuda'
-        """
         self.device = torch.device(device)
-        self.db_path = db_path
+        self.client = tmdb_client
         
-        # Załaduj dane
-        print("Laduje dane...")
-        self.movies_df = pd.read_csv(enriched_data_path)
+        print("Laduje dane i encodery użytkownika...")
+        self.user_movies_df = pd.read_csv(user_movies_path)
         
-        # Załaduj encodery
         with open(encoders_path, 'rb') as f:
             self.encoders = pickle.load(f)
         
@@ -69,15 +56,14 @@ class MovieRecommender:
         
         print(f"   Wymiary enkoderów: gatunki={self.n_genres}, reżyserzy={self.n_directors}, aktorzy={self.n_actors}")
         
-        # Załaduj model
         print("Laduje model...")
         checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
         
-        if 'input_dim' in checkpoint:
-            input_dim = checkpoint['input_dim']
-            print(f"   Wykryto wymiar modelu: {input_dim} (z metadanych)")
-        else:
-            raise ValueError("Nie można wykryć wymiaru wejściowego modelu z checkpoint!")
+        if 'input_dim' not in checkpoint:
+            raise ValueError("Checkpoint modelu jest niekompatybilny (brak 'input_dim').")
+        
+        input_dim = checkpoint['input_dim']
+        print(f"   Wykryto wymiar modelu: {input_dim} (z metadanych)")
         
         self.model = create_model(input_dim)
         self.model.load_state_dict(checkpoint['model_state_dict'])
@@ -85,143 +71,153 @@ class MovieRecommender:
         self.model.eval()
         
         print(f"OK Recommender gotowy!")
-        print(f"   Filmy uzytkownika: {len(self.movies_df)}")
 
-    def _fetch_movie_from_db(self, movie_id: int) -> Optional[pd.Series]:
-        import sqlite3
-        conn = sqlite3.connect(self.db_path)
-        query = """
-        SELECT 
-            m.id as tmdb_id, m.title, m.year, m.rating as tmdb_rating, m.popularity as tmdb_popularity, m.type as tmdb_type,
-            GROUP_CONCAT(DISTINCT g.name) as genres,
-            (SELECT d.name FROM movie_directors md2 JOIN directors d ON md2.director_id = d.id WHERE md2.movie_id = m.id LIMIT 1) as director,
-            (SELECT GROUP_CONCAT(a.name) FROM movie_actors ma2 JOIN actors a ON ma2.actor_id = a.id WHERE ma2.movie_id = m.id ORDER BY ma2.cast_order LIMIT 5) as actors
-        FROM movies m
-        LEFT JOIN movie_genres mg ON m.id = mg.movie_id
-        LEFT JOIN genres g ON mg.genre_id = g.id
-        WHERE m.id = ?
-        GROUP BY m.id
-        """
-        result = pd.read_sql_query(query, conn, params=(movie_id,))
-        conn.close()
-        if result.empty: return None
-        row = result.iloc[0].copy()
-        for col in ['genres', 'actors']:
-            if pd.notna(row[col]): row[col] = str([s.strip() for s in row[col].split(',')])
-            else: row[col] = '[]'
-        for col in ['director', 'tmdb_rating', 'tmdb_popularity', 'year']:
-            if pd.isna(row.get(col)): row[col] = 0 if 'rating' in col or 'popularity' in col else 'Unknown'
-        return row
-
-    def _create_features(self, movie_row: pd.Series) -> np.ndarray:
-        features = []
-        num_vals = movie_row[['tmdb_rating', 'tmdb_popularity', 'year']].values.reshape(1, -1)
-        features.extend(self.scaler.transform(num_vals)[0])
-        
-        try: genres = eval(movie_row['genres']) if isinstance(movie_row['genres'], str) else []
-        except: genres = []
-        known_genres = [g for g in genres if g in self.genre_encoder.classes_]
-        features.extend(self.genre_encoder.transform([known_genres])[0])
-        
-        director_vec = np.zeros(self.n_directors)
-        if pd.notna(movie_row['director']) and movie_row['director'] in self.top_directors:
-            director_vec[self.top_directors.index(movie_row['director'])] = 1
-        else: director_vec[-1] = 1
-        features.extend(director_vec)
-        
-        try: actors = eval(movie_row['actors']) if isinstance(movie_row['actors'], str) else []
-        except: actors = []
-        actor_vec = np.zeros(self.n_actors)
-        for actor in actors[:5]:
-            if actor in self.actor_to_idx:
-                idx = self.actor_to_idx[actor]
-                if idx < self.n_actors: actor_vec[idx] = 1
-        features.extend(actor_vec)
-        
-        movie_type = movie_row.get('tmdb_type', 'movie')
-        features.extend([1 if movie_type == 'movie' else 0, 1 if movie_type == 'tv' else 0])
-        
-        return np.array(features, dtype=np.float32)
-
-    def predict_score(self, movie_id: int) -> float:
-        """
-        Przewiduje wynik dopasowania dla pojedynczego filmu.
-        
-        Args:
-            movie_id: ID filmu w TMDB
+    def _create_features_from_api(self, api_details: dict, api_credits: dict) -> Optional[np.ndarray]:
+        """Tworzy wektor cech dla filmu na podstawie danych z API."""
+        try:
+            features = []
             
-        Returns:
-            Przewidywany wynik dopasowania [0, 1]
-        """
-        movie = self.movies_df[self.movies_df['tmdb_id'] == movie_id]
-        movie_data = movie.iloc[0] if not movie.empty else self._fetch_movie_from_db(movie_id)
-        if movie_data is None: raise ValueError(f"Film {movie_id} nie został znaleziony")
+            # 1. Cechy numeryczne
+            rating = api_details.get('vote_average', 0)
+            popularity = api_details.get('popularity', 0)
+            year_str = api_details.get('release_date') or api_details.get('first_air_date', '')
+            year = int(year_str[:4]) if year_str else 2000
+            
+            num_vals = np.array([[rating, popularity, year]])
+            features.extend(self.scaler.transform(num_vals)[0])
+            
+            # 2. Gatunki
+            genres = [g['name'] for g in api_details.get('genres', [])]
+            known_genres = [g for g in genres if g in self.genre_encoder.classes_]
+            features.extend(self.genre_encoder.transform([known_genres])[0])
+            
+            # 3. Reżyser
+            directors = [c['name'] for c in api_credits.get('crew', []) if c.get('job') == 'Director']
+            director_vec = np.zeros(self.n_directors)
+            director_found = False
+            for director in directors:
+                if director in self.top_directors:
+                    director_vec[self.top_directors.index(director)] = 1
+                    director_found = True
+                    break
+            if not director_found:
+                director_vec[-1] = 1
+            features.extend(director_vec)
+            
+            # 4. Aktorzy
+            actors = [c['name'] for c in api_credits.get('cast', [])]
+            actor_vec = np.zeros(self.n_actors)
+            for actor in actors[:10]: # Bierzemy top 10 aktorów z obsady filmu
+                if actor in self.actor_to_idx:
+                    actor_vec[self.actor_to_idx[actor]] = 1
+            features.extend(actor_vec)
+            
+            # 5. Typ
+            is_movie = 1 if 'release_date' in api_details else 0
+            features.extend([is_movie, 1 - is_movie])
+            
+            return np.array(features, dtype=np.float32)
+
+        except Exception as e:
+            # print(f"Błąd przy tworzeniu cech dla filmu: {e}")
+            return None
+
+    def _get_candidate_ids(self, watched_movie_ids: Set[int], media_type: str) -> Set[int]:
+        """Pobiera ID kandydatów do rekomendacji z różnych źródeł API."""
+        candidate_ids = set()
         
-        features = self._create_features(movie_data)
-        with torch.no_grad():
-            X = torch.FloatTensor(features).unsqueeze(0).to(self.device)
-            prediction = self.model(X).item()
-        return prediction
+        print(f"\nPobieram kandydatów dla '{media_type}'...")
+        
+        # Źródło 1: Filmy popularne
+        print("   -> Źródło 1/3: Filmy popularne...")
+        discover_func = self.client.discover_movies if media_type == 'movie' else self.client.discover_tv
+        for page in range(1, 4): # 3 strony = 60 filmów
+            res = discover_func(page=page, sort_by='popularity.desc')
+            candidate_ids.update(r['id'] for r in res.get('results', []))
+        
+        # Źródło 2: Filmy najwyżej oceniane
+        print("   -> Źródło 2/3: Filmy najwyżej oceniane...")
+        for page in range(1, 10):
+            res = discover_func(page=page, sort_by='vote_average.desc', min_vote_count=500)
+            candidate_ids.update(r['id'] for r in res.get('results', []))
+
+        # Źródło 3: Filmy podobne do ulubionych
+        print("   -> Źródło 3/3: Filmy podobne do ulubionych...")
+        favorite_movies = self.user_movies_df[self.user_movies_df['tmdb_type'] == media_type].nlargest(5, 'user_rating')
+        similar_func = self.client.get_movie_similar if media_type == 'movie' else self.client.get_tv_similar
+        
+        for _, row in favorite_movies.iterrows():
+            res = similar_func(row['tmdb_movie_id'])
+            candidate_ids.update(r['id'] for r in res.get('results', [])[:5]) # Top 5 podobnych
+
+        print(f"   Zebrano {len(candidate_ids)} unikalnych kandydatów.")
+        
+        # Odrzuć już obejrzane
+        final_candidates = candidate_ids - watched_movie_ids
+        print(f"   Po odrzuceniu obejrzanych, zostało {len(final_candidates)} kandydatów.")
+        return final_candidates
 
     def get_top_recommendations(
-        self, watched_movie_ids: List[int], n: int = 10, min_score: Optional[float] = None,
-        movie_type: Optional[str] = None, min_popularity: float = 5.0, **kwargs
+        self,
+        watched_movie_ids: List[int],
+        n: int = 10,
+        movie_type: str = 'movie'
     ) -> pd.DataFrame:
-        """
-        Generuje top rekomendacje, zwracając filmy z najwyższymi wynikami dopasowania.
         
-        Args:
-            min_score: Minimalny przewidywany wynik dopasowania [0, 1]
-            ... (pozostałe argumenty bez zmian)
-        """
-        import sqlite3
-        print(f"Generuje top {n} rekomendacji z bazy danych...")
-        conn = sqlite3.connect(self.db_path)
+        candidate_ids = self._get_candidate_ids(set(watched_movie_ids), movie_type)
         
-        where_clauses = [f"m.id NOT IN ({','.join(map(str, watched_movie_ids))})", f"m.popularity >= {min_popularity}"]
-        if movie_type: where_clauses.append(f"m.type = '{movie_type}'")
+        print(f"\nPrzetwarzam {len(candidate_ids)} kandydatów, aby wygenerować top {n} rekomendacji...")
         
-        query = f"""
-        SELECT DISTINCT m.id as tmdb_id, m.title, m.year, m.rating as tmdb_rating, m.popularity as tmdb_popularity, m.type as tmdb_type,
-            (SELECT GROUP_CONCAT(DISTINCT g2.name) FROM movie_genres mg2 JOIN genres g2 ON mg2.genre_id = g2.id WHERE mg2.movie_id = m.id) as genres,
-            (SELECT d.name FROM movie_directors md2 JOIN directors d ON md2.director_id = d.id WHERE md2.movie_id = m.id LIMIT 1) as director,
-            (SELECT GROUP_CONCAT(a.name) FROM movie_actors ma2 JOIN actors a ON ma2.actor_id = a.id WHERE ma2.movie_id = m.id ORDER BY ma2.cast_order LIMIT 5) as actors
-        FROM movies m WHERE {' AND '.join(where_clauses)} ORDER BY m.popularity DESC LIMIT 1000
-        """
-        candidates = pd.read_sql_query(query, conn)
-        conn.close()
-        print(f"   Pobrаno {len(candidates)} kandydatów z bazy")
-        if candidates.empty: return pd.DataFrame()
+        recommendations_data = []
+        total_candidates = len(candidate_ids)
+        start_time = time.time()
 
-        for idx, row in candidates.iterrows():
-            for col in ['genres', 'actors']:
-                if pd.notna(row[col]): candidates.at[idx, col] = str(row[col].split(','))
-                else: candidates.at[idx, col] = '[]'
+        details_func = self.client.get_movie_details if movie_type == 'movie' else self.client.get_tv_details
+        credits_func = self.client.get_movie_credits if movie_type == 'movie' else self.client.get_tv_credits
+
+        for i, tmdb_id in enumerate(candidate_ids):
+            details = details_func(tmdb_id)
+            credits = credits_func(tmdb_id)
+            
+            if not details or not credits: continue
+
+            features = self._create_features_from_api(details, credits)
+            if features is None: continue
+            
+            with torch.no_grad():
+                X = torch.FloatTensor(features).unsqueeze(0).to(self.device)
+                score = self.model(X).item()
+            
+            year_str = details.get('release_date') or details.get('first_air_date', '')
+            recommendations_data.append({
+                'tmdb_id': tmdb_id,
+                'title': details.get('title') or details.get('name'),
+                'year': int(year_str[:4]) if year_str else 'N/A',
+                'type': movie_type,
+                'match_score': score,
+                'tmdb_rating': details.get('vote_average', 0),
+                'tmdb_popularity': details.get('popularity', 0),
+                'genres': [g['name'] for g in details.get('genres', [])],
+                'director': next((c['name'] for c in credits.get('crew', []) if c.get('job') == 'Director'), None),
+                'actors': [c['name'] for c in credits.get('cast', [])[:5]]
+            })
+
+            if (i + 1) % 50 == 0:
+                 elapsed = time.time() - start_time
+                 rate = (i + 1) / elapsed
+                 remaining = total_candidates - (i + 1)
+                 eta = remaining / rate if rate > 0 else 0
+                 print(f"   [{i+1}/{total_candidates}] Oceniono... (ETA: {eta:.0f}s)")
         
-        print("   Przewidywanie wyników dopasowania...")
-        predictions = []
-        for _, row in candidates.iterrows():
-            try:
-                features = self._create_features(row)
-                with torch.no_grad():
-                    X = torch.FloatTensor(features).unsqueeze(0).to(self.device)
-                    pred = self.model(X).item()
-                predictions.append(pred)
-            except Exception: predictions.append(0.0)
+        if not recommendations_data:
+            print("   Nie udało się wygenerować żadnych rekomendacji.")
+            return pd.DataFrame()
+            
+        recommendations_df = pd.DataFrame(recommendations_data)
+        result_df = recommendations_df.nlargest(n, 'match_score')
         
-        candidates['match_score'] = predictions
-        
-        if min_score: candidates = candidates[candidates['match_score'] >= min_score]
-        
-        recommendations = candidates.nlargest(n, 'match_score')
-        
-        result = recommendations[[
-            'tmdb_id', 'title', 'year', 'tmdb_type', 'match_score', 
-            'tmdb_rating', 'tmdb_popularity', 'genres', 'director', 'actors'
-        ]].reset_index(drop=True)
-        result = result.rename(columns={'tmdb_type': 'type'})
-        print(f"✅ Wygenerowano {len(result)} rekomendacji")
-        return result
+        print(f"✅ Wygenerowano {len(result_df)} rekomendacji")
+        return result_df.reset_index(drop=True)
 
 def format_recommendations(df: pd.DataFrame, content_type: str = "FILMOW") -> None:
     """Wyświetla rekomendacje w czytelny sposób, używając wyniku dopasowania."""
@@ -238,21 +234,14 @@ def format_recommendations(df: pd.DataFrame, content_type: str = "FILMOW") -> No
         if 'tmdb_rating' in row:
             print(f"   TMDB: {row['tmdb_rating']:.1f}/10 | Popularnosc: {row['tmdb_popularity']:.1f}")
         
-        try: genres = eval(row['genres']) if isinstance(row['genres'], str) else []
-        except: genres = []
+        genres = row.get('genres', [])
         print(f"   Gatunki: {', '.join(genres)}")
         
         if pd.notna(row['director']):
             print(f"   Rezyser: {row['director']}")
         
-        try: actors = eval(row['actors']) if isinstance(row['actors'], str) else []
-        except: actors = []
+        actors = row.get('actors', [])
         if actors:
-            print(f"   Obsada: {', '.join(actors[:3])}")
+            print(f"   Obsada: {', '.join(actors)}")
     
     print("\n" + "="*100)
-
-if __name__ == "__main__":
-    # Ten blok testowy wymaga aktualizacji, aby odzwierciedlić zmiany
-    # Na razie go pomijamy, ponieważ główna logika jest w pipeline.py
-    print("✅ Recommender refactored. Run pipeline.py to test.")

@@ -75,3 +75,5 @@ desktop.ini
 
 # TensorBoard
 events.out.tfevents.*
+
+database_user/letterboxd-*/

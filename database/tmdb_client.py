@@ -108,6 +108,38 @@ class TMDBClient:
         }
         
         return self._make_request('discover/tv', params)
+
+    def search_movie(self, query: str, year: Optional[int] = None) -> Dict:
+        """
+        Wyszukuje filmy po tytule.
+        
+        Args:
+            query: Tytuł filmu
+            year: Rok produkcji (opcjonalnie)
+            
+        Returns:
+            Wyniki wyszukiwania z API
+        """
+        params = {'query': query}
+        if year:
+            params['year'] = year
+        return self._make_request('search/movie', params)
+
+    def search_tv(self, query: str, year: Optional[int] = None) -> Dict:
+        """
+        Wyszukuje seriale po tytule.
+        
+        Args:
+            query: Tytuł serialu
+            year: Rok pierwszej emisji (opcjonalnie)
+            
+        Returns:
+            Wyniki wyszukiwania z API
+        """
+        params = {'query': query}
+        if year:
+            params['first_air_date_year'] = year
+        return self._make_request('search/tv', params)
     
     def get_movie_details(self, movie_id: int) -> Dict:
         """
@@ -156,6 +188,30 @@ class TMDBClient:
             Dane o obsadzie i ekipie
         """
         return self._make_request(f'tv/{tv_id}/credits')
+
+    def get_movie_similar(self, movie_id: int) -> Dict:
+        """
+        Pobiera listę podobnych filmów.
+        
+        Args:
+            movie_id: ID filmu w TMDB
+            
+        Returns:
+            Dane o podobnych filmach
+        """
+        return self._make_request(f'movie/{movie_id}/similar')
+
+    def get_tv_similar(self, tv_id: int) -> Dict:
+        """
+        Pobiera listę podobnych seriali.
+        
+        Args:
+            tv_id: ID serialu w TMDB
+            
+        Returns:
+            Dane o podobnych serialach
+        """
+        return self._make_request(f'tv/{tv_id}/similar')
     
     def get_genre_list(self, media_type: str = 'movie') -> List[Dict]:
         """
