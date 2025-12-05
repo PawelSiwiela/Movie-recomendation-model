@@ -1,90 +1,90 @@
-# 🎬 Spersonalizowany Model Rekomendacji Filmów
+# 🎬 Personalized Movie Recommendation Model
 
-Nowoczesny, w pełni zautomatyzowany system rekomendacji filmów, który trenuje spersonalizowany model w oparciu o Twoje oceny z serwisu Letterboxd.
+A modern, fully-automated movie recommendation system that trains a personalized model based on your ratings from Letterboxd.
 
-Projekt działa w architekturze **"On-Demand"**, co oznacza, że **nie wymaga pobierania wielogigabajtowej bazy danych**. Wszystkie potrzebne informacje pobierane są na żywo z API TMDB podczas działania skryptu, dzięki czemu możesz uzyskać pierwsze rekomendacje w ciągu kilku minut od zera.
+This project operates on an **"On-Demand" architecture**, which means it **does not require downloading a large, multi-gigabyte database**. All necessary movie information is fetched live from the TMDB API as the script runs, allowing you to get your first recommendations within minutes from a fresh start.
 
-### Główne Cechy:
--   **🚀 Szybki start:** Brak potrzeby wielogodzinnej synchronizacji bazy danych.
--   **🤖 Osobisty model:** Dla każdego użytkownika trenowana jest od nowa sieć neuronowa (PyTorch), która uczy się jego unikalnego gustu.
--   **💡 Inteligentne rekomendacje:** System proponuje filmy, których nie widziałeś, bazując na hybrydowej strategii (biorąc pod uwagę filmy popularne, najwyżej oceniane i podobne do Twoich ulubionych).
--   **✨ Czytelne wyniki:** Rekomendacje prezentowane są jako procentowy "Wynik dopasowania", co jest bardziej intuicyjne niż symulowana ocena w gwiazdkach.
--   **🧹 W pełni zautomatyzowany:** Jeden skrypt (`pipeline.py`) zarządza całym procesem – od wczytania danych, przez trening, aż po wygenerowanie rekomendacji.
+### ✨ Key Features
+-   **🚀 Quick Start:** No need for a multi-hour database synchronization. Get up and running in minutes.
+-   **🤖 Personal Model:** A new neural network (PyTorch) is trained from scratch for each user, learning their unique taste profile.
+-   **💡 Smart Recommendations:** The system suggests movies you haven't seen, based on a hybrid candidate generation strategy (considering popular, top-rated, and movies similar to your favorites).
+-   **✨ Interpretable Scores:** Recommendations are presented as a percentage-based "Match Score," which is more intuitive than a simulated star rating.
+-   **🧹 Fully Automated:** A single script (`pipeline.py`) manages the entire process—from loading user data and training the model to generating final recommendations.
 
 ---
 
-## 🚀 Uruchomienie
+## 🚀 Getting Started
 
-Wymagany jest Python 3.10+ oraz klucz API z [The Movie Database (TMDB)](https://www.themoviedb.org/signup).
+Requires Python 3.10+ and an API key from [The Movie Database (TMDB)](https://www.themoviedb.org/signup).
 
-### 1. Instalacja
+### 1. Installation
 
 ```bash
-# Sklonuj repozytorium
-git clone https://github.com/TwojaNazwa/TwojeRepo.git
-cd Movie-recomendation-model
+# Clone the repository
+git clone https://github.com/YourUsername/Movie-Recommendation-Model.git
+cd Movie-Recommendation-Model
 
-# Zainstaluj zależności
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2. Konfiguracja
+### 2. Configuration
 
-1.  Utwórz w głównym folderze projektu plik o nazwie `.env`.
-2.  W pliku `.env` dodaj jedną linię, wklejając swój klucz API v3 z TMDB:
+1.  In the project's root directory, create a file named `.env`.
+2.  Inside the `.env` file, add a single line, pasting your v3 API key from TMDB:
     ```
-    TMDB_API_KEY="tutaj_wklej_swój_klucz_api"
+    TMDB_API_KEY="paste_your_api_key_here"
     ```
 
-### 3. Dane Użytkownika
+### 3. User Data
 
-1.  Pobierz swój eksport danych z [Letterboxd](https://letterboxd.com/settings/data/).
-2.  Wypakuj pobrane archiwum `.zip`.
-3.  Przenieś cały folder z danymi (np. `letterboxd-nazwa-2025-12-04...`) do katalogu `database_user/` w projekcie.
+1.  Download your data export from [Letterboxd](https://letterboxd.com/settings/data/).
+2.  Unzip the downloaded archive.
+3.  Move the entire data folder (e.g., `letterboxd-username-2025-12-04...`) into the `database_user/` directory in the project.
 
-### 4. Generowanie Rekomendacji
+### 4. Generate Recommendations
 
-Wszystko gotowe! Uruchom główny pipeline w terminalu:
+You're all set! Run the main pipeline in your terminal:
 
 ```bash
 python pipeline.py
 ```
 
-Skrypt automatycznie wykryje dostępne dane użytkowników i poprosi Cię o wybór w interaktywnym menu.
+The script will automatically detect the available user data folders and will prompt you to choose one from an interactive menu.
 
-Możesz również podać użytkownika bezpośrednio:
+Alternatively, you can specify the user directly:
 ```bash
-python pipeline.py --user nazwa_folderu_uzytkownika
+python pipeline.py --user your_letterboxd_folder_name
 ```
 
-Cały proces (dopasowanie filmów, pobranie ich danych, trening i rekomendacja) potrwa kilka-kilkanaście minut, w zależności od liczby ocenionych przez Ciebie filmów i obciążenia API TMDB.
+The entire process (matching movies, fetching their data, training the model, and generating recommendations) will take several minutes, depending on the number of movies you've rated and the current TMDB API load.
 
 ---
 
-## 🛠️ Struktura Projektu
+## 🛠️ Project Structure
 
 ```
 .
-├── .env                  # Plik z kluczem API (tworzony ręcznie)
-├── .gitignore            # Pliki ignorowane przez Git
-├── pipeline.py           # GŁÓWNY SKRYPT - wszystko uruchamia się stąd
-├── requirements.txt      # Zależności projektu
-├── README.md             # Ta dokumentacja
+├── .env                  # Stores your TMDB API key (created manually)
+├── .gitignore            # Files ignored by Git
+├── pipeline.py           # MAIN SCRIPT - run this to start the process
+├── requirements.txt      # Project dependencies
+├── README.md             # This documentation file
 │
 ├── database/
-│   └── tmdb_client.py    # Klient do komunikacji z API TMDB
+│   └── tmdb_client.py    # Client for communicating with the TMDB API
 │
 ├── database_user/
-│   ├── letterboxd_parser.py    # Parser plików CSV z Letterboxd
-│   └── letterboxd-user-1/...   # Folder z danymi użytkownika
+│   ├── letterboxd_parser.py    # Parses CSV files from a Letterboxd export
+│   └── letterboxd-user-1/...   # Folder containing a user's data
 │
 └── src/
     ├── data_matching/
-    │   └── match_movies.py     # Dopasowuje filmy z Letterboxd do ID z API TMDB
-    │   └── prepare_training_data.py # Przygotowuje dane do treningu
+    │   └── match_movies.py     # Matches Letterboxd movies to TMDB IDs via API
+    │   └── prepare_training_data.py # Prepares data for model training
     │
     └── model/
-        ├── model.py            # Definicja architektury sieci neuronowej
-        ├── training.py         # Logika treningu modelu
-        └── recommender.py      # Generowanie rekomendacji z użyciem modelu
+        ├── model.py            # Neural network architecture definition
+        ├── training.py         # Model training logic
+        └── recommender.py      # Generates recommendations using the trained model
 ```
